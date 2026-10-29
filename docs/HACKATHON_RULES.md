@@ -47,7 +47,7 @@ The guide excludes basic RAG applications and simple image analyzers among its p
 
 For this event, the guide specifies Baseten model **`meta-models/muse-spark-open-1026`**. Use that event-specific identifier even though the general public cookbook shows a different slug.
 
-The inspected submission form contains: Team Name; Team Members; track; problem/theme; optional X-post link for the viral award; Project Description; Public GitHub Repository; 3 Minute Demo Video; Describe use of Meta Products; Why Meta models were important; Feedback on Meta experience; Feedback on Partner Technologies; a legal permission checkbox for Meta/Cerebral Valley to publish, share and promote the submission; and Submit. The members control showed the user's **J de Beer** account. Registered roster and representative details still need the participant's confirmation. [SUBMISSION_DRAFT.md](SUBMISSION_DRAFT.md) prepares each field without inventing URLs, feedback or runtime results.
+The inspected submission form contains: Team Name; Team Members; track; problem/theme; optional X-post link for the viral award; Project Description; Public GitHub Repository; 3 Minute Demo Video; Describe use of Meta Products; Why Meta models were important; Feedback on Meta experience; Feedback on Partner Technologies; a legal permission checkbox for Meta/Cerebral Valley to publish, share and promote the submission; and Submit. The members control showed **Johan de Beer** (`JohandeBeer`). Registered roster and representative details still need the participant's confirmation. [SUBMISSION_DRAFT.md](SUBMISSION_DRAFT.md) prepares each field without inventing URLs, feedback or runtime results.
 
 ## Credits and billing instructions
 
