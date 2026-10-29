@@ -98,6 +98,139 @@ const documentRole = (type: Document["type"]) =>
       ? "Goods received"
       : nice(type);
 type Tab = "evidence" | "review" | "trace" | "integrity";
+interface IntegrityReport {
+  trail?: { valid?: boolean; events?: number; head?: string; error?: string };
+  resultSeal?: { valid?: boolean; seal?: string; error?: string };
+  filesValid?: boolean;
+  filesChecked?: number;
+  problems?: string[];
+  annotationsValid?: boolean;
+  annotationProblems?: string[];
+}
+function IntegrityResults({
+  report,
+  notesCount,
+  reviewsCount,
+}: {
+  report: IntegrityReport;
+  notesCount: number;
+  reviewsCount: number;
+}) {
+  const rows = [
+    {
+      label: "Event chain",
+      valid: report.trail?.valid,
+      count:
+        typeof report.trail?.events === "number"
+          ? `${report.trail.events.toLocaleString()} linked events checked`
+          : "Event count was not reported",
+      passedDetail:
+        "Recorded event contents and links agree with the retained chain.",
+      issues: report.trail?.error ? [report.trail.error] : [],
+    },
+    {
+      label: "Run result seal",
+      valid: report.resultSeal?.valid,
+      count: "Ledger, source records, crops and claims",
+      passedDetail: "The evidence state agrees with the sealed run.",
+      issues: report.resultSeal?.error ? [report.resultSeal.error] : [],
+    },
+    {
+      label: "Evidence files",
+      valid: report.filesValid,
+      count:
+        typeof report.filesChecked === "number"
+          ? `${report.filesChecked.toLocaleString()} files checked`
+          : "File count was not reported",
+      passedDetail:
+        "Source files, rendered pages, crops and any masks agree with their retained hashes.",
+      issues: report.problems ?? [],
+    },
+    {
+      label: "Notes and review decisions",
+      valid: report.annotationsValid,
+      count: `${notesCount.toLocaleString()} notes · ${reviewsCount.toLocaleString()} review decisions in this engagement`,
+      passedDetail: "Annotations agree with their retained event hashes.",
+      issues: report.annotationProblems ?? [],
+    },
+  ].map((row) => ({
+    ...row,
+    outcome:
+      row.valid === true && row.issues.length === 0
+        ? "passed"
+        : row.valid === false || row.issues.length > 0
+          ? "failed"
+          : "unreported",
+  }));
+  const passed = rows.every((row) => row.outcome === "passed");
+  return (
+    <div className="integrity-summary" aria-live="polite">
+      <div className={`integrity-verdict ${passed ? "passed" : "failed"}`}>
+        {passed ? <ShieldCheck size={25} /> : <TriangleAlert size={25} />}
+        <div>
+          <h4>
+            {passed
+              ? "All recorded integrity checks passed"
+              : "Integrity checks need attention"}
+          </h4>
+          <p>
+            {passed
+              ? "No differences were found against this engagement’s retained hashes."
+              : "A check failed or was not reported. Inspect the affected evidence before relying on it."}
+          </p>
+        </div>
+      </div>
+      <div className="integrity-checks">
+        {rows.map((row) => (
+          <div className={`integrity-check ${row.outcome}`} key={row.label}>
+            <div className="integrity-check-heading">
+              <strong>{row.label}</strong>
+              <span className="integrity-check-status">
+                {row.outcome === "passed" ? (
+                  <Check size={13} />
+                ) : row.outcome === "failed" ? (
+                  <TriangleAlert size={13} />
+                ) : (
+                  <Info size={13} />
+                )}
+                {row.outcome === "passed"
+                  ? "Pass"
+                  : row.outcome === "failed"
+                    ? "Fail"
+                    : "Not reported"}
+              </span>
+            </div>
+            <span className="integrity-check-count">{row.count}</span>
+            {row.outcome === "passed" && <p>{row.passedDetail}</p>}
+            {row.issues.length > 0 ? (
+              <ul className="integrity-issues">
+                {row.issues.map((issue, index) => (
+                  <li key={`${index}-${issue}`}>{issue}</li>
+                ))}
+              </ul>
+            ) : row.outcome !== "passed" ? (
+              <p>
+                {row.outcome === "failed"
+                  ? "The server reported a failed check without further details."
+                  : "No verification result was returned for this check."}
+              </p>
+            ) : null}
+          </div>
+        ))}
+      </div>
+      <details className="integrity-technical">
+        <summary>
+          <Info size={14} />
+          <span>Technical details</span>
+          <ChevronDown size={14} />
+        </summary>
+        <pre className="integrity-result">
+          {JSON.stringify(report, null, 2)}
+        </pre>
+      </details>
+    </div>
+  );
+}
 function status(e: Engagement, l: LedgerLine) {
   const cs = e.claims.filter((c) => c.ledgerId === l.id);
   return !cs.length
@@ -154,7 +287,7 @@ function App() {
     [token, setToken] = useState(""),
     [note, setNote] = useState(""),
     [nextMode, setNextMode] = useState<"demo" | "live">("demo"),
-    [integrity, setIntegrity] = useState<unknown>(null);
+    [integrity, setIntegrity] = useState<IntegrityReport | null>(null);
   const searchRef = useRef<HTMLInputElement>(null),
     pollRef = useRef(false);
   const notify = (text: string) => {
@@ -816,7 +949,9 @@ function App() {
                       <h2>
                         {line?.invoice_no || "Document viewer"}
                         <span className="document-count">
-                          {lineDocs.length ? `${lineDocs.length} related` : `${allDocs.length} pages`}
+                          {lineDocs.length
+                            ? `${lineDocs.length} related`
+                            : `${allDocs.length} pages`}
                         </span>
                       </h2>
                     </div>
@@ -829,7 +964,10 @@ function App() {
                       <Maximize2 size={17} />
                     </button>
                   </div>
-                  <div className="document-tabs" aria-label="Related source pages">
+                  <div
+                    className="document-tabs"
+                    aria-label="Related source pages"
+                  >
                     {docs.slice(0, 8).map((d) => (
                       <button
                         key={d.id}
@@ -859,7 +997,9 @@ function App() {
                         }}
                       >
                         {lineDocs.length > 0 && (
-                          <optgroup label={`Selected sample · ${line?.id || "sources"}`}>
+                          <optgroup
+                            label={`Selected sample · ${line?.id || "sources"}`}
+                          >
                             {lineDocs.map((d) => (
                               <option key={d.id} value={d.id}>
                                 {documentRole(d.type)} · {d.name}
@@ -868,7 +1008,13 @@ function App() {
                           </optgroup>
                         )}
                         {otherDocs.length > 0 && (
-                          <optgroup label={lineDocs.length ? "Other source pages" : "All source pages"}>
+                          <optgroup
+                            label={
+                              lineDocs.length
+                                ? "Other source pages"
+                                : "All source pages"
+                            }
+                          >
                             {otherDocs.map((d) => (
                               <option key={d.id} value={d.id}>
                                 {documentRole(d.type)} · {d.name}
@@ -877,11 +1023,14 @@ function App() {
                           </optgroup>
                         )}
                       </select>
-                      {lineDocs.length > 0 && doc && !relatedDocIds.has(doc.id) && (
-                        <small className="source-context" role="status">
-                          Viewing another source page. Selected sample: {line?.id}.
-                        </small>
-                      )}
+                      {lineDocs.length > 0 &&
+                        doc &&
+                        !relatedDocIds.has(doc.id) && (
+                          <small className="source-context" role="status">
+                            Viewing another source page. Selected sample:{" "}
+                            {line?.id}.
+                          </small>
+                        )}
                     </label>
                   )}
                   <DocumentPreview
@@ -1152,7 +1301,9 @@ function App() {
                         {ev.model || "Deterministic code"}
                         {ev.ledgerId ? " · " + ev.ledgerId : ""}
                       </span>
-                      {ev.providerCall && <ProviderCallDetails call={ev.providerCall} />}
+                      {ev.providerCall && (
+                        <ProviderCallDetails call={ev.providerCall} />
+                      )}
                       <code>SHA256 {ev.hash}</code>
                       <code>Previous {ev.previousHash}</code>
                     </div>
@@ -1186,7 +1337,11 @@ function App() {
                   onClick={async () => {
                     setBusy(true);
                     try {
-                      setIntegrity(await api(`/engagements/${e.id}/integrity`));
+                      setIntegrity(
+                        await api<IntegrityReport>(
+                          `/engagements/${e.id}/integrity`,
+                        ),
+                      );
                     } catch (err) {
                       setError((err as Error).message);
                     } finally {
@@ -1212,9 +1367,11 @@ function App() {
                   replace an auditor’s review.
                 </p>
                 {integrity != null && (
-                  <pre className="integrity-result">
-                    {JSON.stringify(integrity, null, 2)}
-                  </pre>
+                  <IntegrityResults
+                    report={integrity}
+                    notesCount={e.notes.length}
+                    reviewsCount={e.reviews.length}
+                  />
                 )}
                 <div className="integrity-stats">
                   <div>
@@ -1316,17 +1473,22 @@ function App() {
             <strong>Connect your model providers</strong>
             <ol>
               <li>
-                Keep your existing <code>.env</code>. If missing, create it
-                from <code>.env.example</code>.
+                Keep your existing <code>.env</code>. If missing, create it from{" "}
+                <code>.env.example</code>.
               </li>
               <li>
                 Set <code>MODEL_API_KEY</code> and <code>BASETEN_API_KEY</code>.
                 On Windows, <code>./configure.ps1</code> uses hidden prompts.
               </li>
               <li>Restart the server, then select Live API below.</li>
-              <li>Run <code>npm run live:preflight</code> before a full sample.</li>
+              <li>
+                Run <code>npm run live:preflight</code> before a full sample.
+              </li>
             </ol>
-            <p>Configured means a key is present. Successful requests still need validation.</p>
+            <p>
+              Configured means a key is present. Successful requests still need
+              validation.
+            </p>
           </div>
           {e && (
             <div className="mode-control">
@@ -1608,7 +1770,10 @@ function ProviderCallDetails({ call }: { call: ProviderCall }) {
     ["Total tokens", call.usage?.totalTokens ?? "Not reported by provider"],
   ];
   return (
-    <section className="provider-request" aria-label="Provider request metadata">
+    <section
+      className="provider-request"
+      aria-label="Provider request metadata"
+    >
       <strong>Provider request metadata</strong>
       <dl>
         {rows.map(([label, value]) => (
@@ -1672,7 +1837,11 @@ function ClaimCard({
               title={`View ${crop.field} crop`}
               aria-label={`Inspect ${nice(crop.field)} crop from ${e.documents.find((d) => d.id === crop.docId)?.name || "source document"}`}
             >
-              <img loading="lazy" src={fileUrl(crop.path)} alt={`${crop.field} source crop`} />
+              <img
+                loading="lazy"
+                src={fileUrl(crop.path)}
+                alt={`${crop.field} source crop`}
+              />
               <span>
                 <Link2 size={10} />
                 {nice(crop.field)}
@@ -1696,7 +1865,9 @@ function ClaimCard({
       </div>
       <details className="verification-detail">
         <summary>
-          {crops.length ? `Inspect all ${crops.length} crops` : "Verification details"}
+          {crops.length
+            ? `Inspect all ${crops.length} crops`
+            : "Verification details"}
           <ChevronDown size={12} />
         </summary>
         <p>
@@ -1706,7 +1877,10 @@ function ClaimCard({
         <small>
           Attempt {c.attempts} · {c.cropIds.length} evidence crops
         </small>
-        <div className="reread-values" aria-label={`${nice(c.test)} supporting evidence`}>
+        <div
+          className="reread-values"
+          aria-label={`${nice(c.test)} supporting evidence`}
+        >
           {crops.map((crop) => {
             const source = e.documents.find((d) => d.id === crop.docId);
             return (
@@ -1720,7 +1894,9 @@ function ClaimCard({
               >
                 <span>
                   <span>{nice(crop.field)}</span>
-                  <small>{source ? documentRole(source.type) : "Source document"}</small>
+                  <small>
+                    {source ? documentRole(source.type) : "Source document"}
+                  </small>
                 </span>
                 <strong>
                   {crop.verification

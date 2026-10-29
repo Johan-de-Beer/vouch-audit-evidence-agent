@@ -1513,6 +1513,135 @@ h1 > span {
   font-size: 10px;
   line-height: 1.7;
 }
+.integrity-summary {
+  margin-top: 27px;
+  text-align: left;
+  color: #526648;
+}
+.integrity-verdict {
+  display: flex;
+  gap: 13px;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: 7px;
+  border: 1px solid #d3e2c6;
+  background: #eef5e7;
+}
+.integrity-verdict > svg {
+  flex: none;
+  color: #668a4f;
+  margin-top: 2px;
+}
+.integrity-verdict.failed {
+  border-color: #e7cf9f;
+  background: #fbf5e9;
+}
+.integrity-verdict.failed > svg {
+  color: #9e702f;
+}
+.integrity-verdict h4 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #395833;
+}
+.integrity-verdict.failed h4 {
+  color: #815b27;
+}
+.integrity-body .integrity-verdict p {
+  margin: 6px 0 0;
+  font-size: 11px;
+  line-height: 1.65;
+}
+.integrity-checks {
+  margin-top: 15px;
+  border: 1px solid #e0e8d8;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.integrity-check {
+  padding: 16px 18px;
+  background: #fff;
+}
+.integrity-check + .integrity-check {
+  border-top: 1px solid #e7ecdf;
+}
+.integrity-check-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.integrity-check-heading > strong {
+  font-size: 11px;
+  font-weight: 600;
+  color: #41583a;
+}
+.integrity-check-status {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #59803e;
+}
+.integrity-check.failed .integrity-check-status {
+  color: #a06b29;
+}
+.integrity-check.unreported .integrity-check-status {
+  color: #7b8274;
+}
+.integrity-check-count {
+  display: block;
+  margin-top: 7px;
+  font-size: 10px;
+  color: #6b7c61;
+}
+.integrity-body .integrity-check p {
+  margin: 5px 0 0;
+  font-size: 10px;
+  line-height: 1.65;
+  color: #74836a;
+}
+.integrity-issues {
+  margin: 9px 0 0;
+  padding-left: 16px;
+  color: #9a672e;
+  font-size: 10px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.integrity-issues li + li {
+  margin-top: 5px;
+}
+.integrity-technical {
+  margin-top: 14px;
+}
+.integrity-technical > summary {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  padding: 10px 2px;
+  font-size: 10px;
+  color: #6d7f61;
+  list-style: none;
+}
+.integrity-technical > summary::-webkit-details-marker {
+  display: none;
+}
+.integrity-technical > summary > span {
+  flex: 1;
+}
+.integrity-technical[open] > summary > svg:last-child {
+  transform: rotate(180deg);
+}
+.integrity-technical .integrity-result {
+  max-height: 360px;
+  overflow: auto;
+  margin: 4px 0 0;
+}
 .muted-text {
   color: #9ba88c !important;
 }

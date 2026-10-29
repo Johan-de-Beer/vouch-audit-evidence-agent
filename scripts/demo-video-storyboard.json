@@ -1,0 +1,49 @@
+{
+  "title": "Vouch: offline synthetic screenshot rehearsal",
+  "durationSeconds": 180,
+  "framesPerSecond": 30,
+  "label": "OFFLINE SYNTHETIC REHEARSAL",
+  "disclosure": "Real application screenshots | Fictional data | No live Meta execution",
+  "segments": [
+    {
+      "id": "01-overview",
+      "seconds": 20,
+      "narration": "Vouch is Johan's original hackathon build, created with Codex on 29 October 2026. This is a walkthrough of real application screenshots using fictional data. The original workflow links ledger tests, source crops, human review, and portable evidence. Models and libraries are third-party components."
+    },
+    {
+      "id": "02-transposition",
+      "seconds": 25,
+      "narration": "This prepared sample contains twenty-five fictional ledger rows and seventy-five fictional documents. Here, the ledger records four thousand five hundred and thirty rand. The supplier invoice shows four thousand three hundred and fifty rand. The discrepancy links to a visible source crop. Extraction, crop coordinates, and rereads in this rehearsal use labelled fixtures."
+    },
+    {
+      "id": "03-quantity",
+      "seconds": 25,
+      "narration": "The quantity check compares the invoice, purchase order, and goods receipt. Ten units were invoiced and ordered, but only eight were received. Other planted scenarios cover incorrect VAT, missing authorisation, and a duplicate invoice posted twice. Five scenarios produce seven exception findings across six sample rows. These are synthetic control results, not measured model accuracy."
+    },
+    {
+      "id": "04-review",
+      "seconds": 25,
+      "narration": "The review queue keeps an exceptional or uncertain result visible. An auditor can add a named follow-up decision and rationale without rewriting the agent's finding. This screenshot shows an explicitly labelled demonstration review. Typed notes become part of the working paper. The implemented voice-upload workflow requires a configured Meta key before transcription can be validated."
+    },
+    {
+      "id": "05-trace",
+      "seconds": 20,
+      "narration": "The trace lists planning, extraction, crops, deterministic checks, verification, and escalation. In offline mode, model-related stages use known fixtures. Arithmetic runs in code. Compared crops retain separate reread records, and events link to their predecessor by hash."
+    },
+    {
+      "id": "06-integrity",
+      "seconds": 20,
+      "narration": "The integrity view recomputes original source, rendered page, crop, and mask hashes. It also checks the result seal, reviewer notes, and event chain. These controls detect changes against a trusted retained copy. They do not prove that an invoice is genuine, and they do not replace an auditor's judgment."
+    },
+    {
+      "id": "07-export",
+      "seconds": 20,
+      "narration": "The bundle contains original documents, rendered pages, crops, working papers, structured results, and the event trail. Its manifest supports recomputing content hashes. PDF pages retain source labels and continuation context. HTML embeds the crops, so reviewers can inspect findings outside this application."
+    },
+    {
+      "id": "08-models",
+      "seconds": 25,
+      "narration": "The live adapters are implemented for Muse Spark, SAM three point one, Muse Spark Open through Baseten, and Muse Voice Transcribe. Credits have been reported received, but credential and billing setup remain pending. No live Meta execution or model accuracy is claimed here. Live validation and the hackathon submission gate are still pending."
+    }
+  ]
+}
