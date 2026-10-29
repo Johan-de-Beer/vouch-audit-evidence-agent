@@ -60,7 +60,7 @@ function Caption-Chunks([string]$Text) {
     $chunk = ''
     foreach ($word in ($Text -split '\s+')) {
         $candidate = ($chunk + ' ' + $word).Trim()
-        if ($candidate.Length -gt 86 -and $chunk) { $chunks.Add($chunk); $chunk = $word } else { $chunk = $candidate }
+        if ($candidate.Length -gt 78 -and $chunk) { $chunks.Add($chunk); $chunk = $word } else { $chunk = $candidate }
     }
     if ($chunk) { $chunks.Add($chunk) }
     return $chunks.ToArray()
@@ -109,7 +109,9 @@ try {
         $captionOffset = [double]0
         foreach ($chunk in $chunks) {
             $captionLength = $speechSeconds * $chunk.Length / $totalCharacters
-            $captions += [pscustomobject]@{ startSeconds = $offset + $captionOffset; endSeconds = $offset + $captionOffset + $captionLength; text = (Wrap-Caption $chunk) }
+            $wrappedCaption = Wrap-Caption $chunk
+            if (@($wrappedCaption -split "`n").Count -gt 2) { throw 'Caption exceeds the two-line footer. Shorten the narration chunk before rendering.' }
+            $captions += [pscustomobject]@{ startSeconds = $offset + $captionOffset; endSeconds = $offset + $captionOffset + $captionLength; text = $wrappedCaption }
             $captionOffset += $captionLength
         }
         $segments += [pscustomobject]@{ id = $segment.id; seconds = [int]$segment.seconds; startSeconds = $offset; narration = $segment.narration; voice = $voiceName; sourceWave = $rawWave; sourceWaveSha256 = (File-Hash $rawWave); sourceSpeechSeconds = $rawSeconds; speechSpeedFactor = $speed; paddedWave = $wave; paddedWaveSha256 = (File-Hash $wave); speechSeconds = $speechSeconds }
