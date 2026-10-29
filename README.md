@@ -128,7 +128,7 @@ docker run --rm -p 127.0.0.1:3001:3001 --env APP_TOKEN --mount source=vouch-data
 
 Keep the token in your session and enter it in Vouch's unlock screen. The container defaults to `HOST=0.0.0.0`, `PORT=3001`, `DATA_DIR=/app/data`; it refuses to start without the token. Add provider keys as runtime secrets when ready. `.dockerignore` excludes `.env`, local evidence, generated artifacts and `node_modules` from the image context. The image runs as the `node` user; bind-mounted directories must be writable by that user.
 
-The production image was built and exercised successfully in [GitHub Actions](https://github.com/Johan-de-Beer/vouch-audit-evidence-agent/actions/runs/40905488217). The test verified token authentication, session cookies, protected evidence files and a complete synthetic run with valid file hashes and result seal. Local Docker Desktop was not running; container validation ran on a fresh Linux CI host.
+The production image was built and exercised successfully in [GitHub Actions](https://github.com/Johan-de-Beer/vouch-audit-evidence-agent/actions/runs/40907509253). The test verified token authentication, session cookies, protected evidence files and a complete synthetic run with valid file hashes and result seal. Local Docker Desktop was not running; container validation ran on a fresh Linux CI host.
 
 For a service such as Render or Fly, deploy this Dockerfile as **one persistent container**, expose port 3001 behind HTTPS, set `HOST=0.0.0.0` and `DATA_DIR=/app/data`, mount persistent storage there, and provide `APP_TOKEN` and provider keys using the host's secrets interface. Use `/api/health` for the health probe. Keep one replica: SQLite and source files are local. Do not use an ephemeral filesystem or static-only hosting for this API. This repository includes deployment preparation; **no hosted deployment has been performed**.
 
@@ -137,7 +137,7 @@ Back up the entire `DATA_DIR` while stopped, or use a SQLite-aware backup plus c
 ## Hackathon handoff
 
 - [Verified rules and outstanding participant checks](docs/HACKATHON_RULES.md)
-- [Required three-minute demo script and recording plan](docs/DEMO_SCRIPT.md)
+- [Required three-minute demo script and local rehearsal workflow](docs/DEMO_SCRIPT.md)
 - [Submission draft with honest placeholders](docs/SUBMISSION_DRAFT.md)
 - [Live validation and recording template](docs/LIVE_VALIDATION.md)
 

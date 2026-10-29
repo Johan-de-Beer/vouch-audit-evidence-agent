@@ -20,6 +20,20 @@ Before recording, run `npm run check`, start the production server, and create a
 
 Example human review rationale: “Confirmed the ledger/source discrepancy in the synthetic invoice. Request the corrected posting and retain both documents for follow-up.” Do not imply a real client audit was performed.
 
+## Local screenshot rehearsal
+
+A local offline rehearsal is prepared from eight actual application screenshots, with installed Windows speech narration and captions. It is a screenshot walkthrough, not continuous screen recording. Its persistent banner says **OFFLINE SYNTHETIC REHEARSAL**, and the final frame leaves live validation and the submission gate explicitly pending. It is not the final submission video and has not been uploaded.
+
+The generated assets are kept outside Git under `artifacts/demo-video/`: `vouch-offline-rehearsal.mp4`, `captions.srt`, `narration.wav`, a build manifest, representative frames, and the captured synthetic engagement/integrity context. The [storyboard](../scripts/demo-video-storyboard.json) defines the exact eight segments and narration. Its timing is 20/25/25/25/20/20/20/25 seconds, totaling three minutes.
+
+To rebuild on Windows with installed `ffmpeg`, `ffprobe` and `System.Speech`, capture the real application views into `artifacts/demo-video/screens/` as `01-overview.png`, `02-transposition.png`, `03-quantity.png`, `04-review.png`, `05-trace.png`, `06-integrity.png`, `07-export.png`, and `08-models.png`. Then run:
+
+```powershell
+powershell.exe -NoProfile -File scripts/demo-video.ps1
+```
+
+`-PrepareOnly` generates narration and captions without rendering video. `-ScreensDirectory` and `-OutputDirectory` allow explicit local locations. The script never generates application screens or calls a provider. It records source/image/output hashes and checks for exactly 180 seconds and 5,400 frames. Captions use approximate timing aligned to measured local speech, with at most two lines. Inspect the output before any publication.
+
 ## Recording alternatives after credits arrive
 
 Only replace the offline narration once a recorded Meta+SAM+Baseten run succeeds. Show actual provider/model provenance and one crop reread. Keep the fixture score distinct from a new, manually labelled live evaluation. If a tool fails or evidence is uncertain, demonstrate the resulting unverified finding and human review path honestly. Do not edit a fixture result to look like a live API response.
@@ -31,4 +45,4 @@ Only replace the offline narration once a recorded Meta+SAM+Baseten run succeeds
 - Voice upload is unavailable without the Meta key. It accepts supported WAV files; there is no real-time microphone conversation.
 - This build was implemented using Codex on 29 October 2026. Do not claim Muse Code was used.
 - No measured audit time saving, deployment uptime, real customer adoption or live model-accuracy figure is currently available.
-- This script is not a recorded/uploaded video or a completed submission. Use a real public GitHub URL and a real video URL in the form after publication. Keep the [release checklist](HACKATHON_RULES.md) open until its participant-dependent steps are done.
+- The local rehearsal is a draft screenshot walkthrough. A final live-validated video, its uploaded URL and the submission remain pending. Use a real public GitHub URL and a real video URL in the form after publication. Keep the [release checklist](HACKATHON_RULES.md) open until its participant-dependent steps are done.

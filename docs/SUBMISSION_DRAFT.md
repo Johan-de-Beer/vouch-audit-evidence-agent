@@ -48,7 +48,7 @@ Published publicly with source, lockfile, setup instructions, MIT license for or
 
 ## 3 Minute Demo Video
 
-**PENDING — record, upload and supply the actual three-minute video URL.** Three minutes is a verified requirement, not an estimated duration. The guide requires the video to highlight only specific features, code and functionality built during the 27 October–4 November hackathon, with original contribution clear. Failure to distinguish new work can disqualify the entry.
+**PENDING — finalize the live-validated video, upload it and supply the actual three-minute video URL.** A captioned three-minute local offline screenshot rehearsal is available under `artifacts/demo-video/`; it is explicitly a draft, makes no live-inference claim, and has not been uploaded. Three minutes is a verified requirement, not an estimated duration. The guide requires the video to highlight only specific features, code and functionality built during the 27 October–4 November hackathon, with original contribution clear. Failure to distinguish new work can disqualify the entry.
 
 Use [DEMO_SCRIPT.md](DEMO_SCRIPT.md) as the recording plan. Do not present the researched plan, third-party models/libraries/fonts or any pre-existing product as newly written code. Actual Meta API/open-weight execution still needs to be demonstrated honestly; an offline fixture-only recording cannot establish the Stage 1 model-use gate.
 
