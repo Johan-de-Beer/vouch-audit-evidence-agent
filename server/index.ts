@@ -14,8 +14,10 @@ import { parseLedger, ingestDocument, safeFile } from "./ingest.js";
 import { exportBundle, workpaperHtml, workpaperPdf } from "./export.js";
 import { runEngagement } from "./engine.js";
 import { getSettings, transcribeAudio } from "./providers.js";
+import { withProviderTrace } from "./provider-trace.js";
 import {
   appendEvent,
+  appendProviderEvent,
   validateTrail,
   validateResultSeal,
   canonicalJson,
@@ -336,9 +338,9 @@ app.post(
         req.file.path + path.extname(req.file.originalname).toLowerCase();
       await fs.rename(req.file.path, tempAudio);
       req.file.path = tempAudio;
-      const result = await transcribeAudio(
-        req.file.path,
-        e.ledger.map((l) => l.vendor),
+      const result = await withProviderTrace(
+        (call) => { appendProviderEvent(e, call, ledgerId); store.save(e); },
+        () => transcribeAudio(req.file!.path, e.ledger.map((l) => l.vendor)),
       );
       const note = {
         id: randomUUID(),

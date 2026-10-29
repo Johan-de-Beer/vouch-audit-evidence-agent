@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
-import type { AgentEvent, Engagement } from "../shared/types.js";
+import type { AgentEvent, Engagement, ProviderCall } from "../shared/types.js";
 
 export function canonicalJson(value: unknown): string {
   if (value === null || typeof value !== "object") return JSON.stringify(value);
@@ -17,7 +17,7 @@ export function appendEvent(
   engagement: Engagement,
   stage: AgentEvent["stage"],
   message: string,
-  extra: Pick<AgentEvent, "ledgerId" | "model"> = {},
+  extra: Pick<AgentEvent, "ledgerId" | "model" | "providerCall"> = {},
 ): AgentEvent {
   const base = {
     id: randomUUID(),
@@ -30,6 +30,16 @@ export function appendEvent(
   const event = { ...base, hash: eventHash(base) };
   engagement.events.push(event);
   return event;
+}
+export function appendProviderEvent(engagement: Engagement, call: ProviderCall, ledgerId?: string): AgentEvent {
+  const model = call.returnedModel ?? call.requestedModel;
+  const reference = call.requestId ?? call.responseId;
+  return appendEvent(
+    engagement,
+    call.operation === "transcribe" ? "note" : call.operation,
+    `${call.provider === "meta" ? "Meta" : "Baseten"} ${call.operation} ${call.outcome} in ${call.durationMs} ms. Requested model ${call.requestedModel}; ${call.returnedModel ? `returned model ${call.returnedModel}` : "provider did not return a model identifier"}.${reference ? ` Provider reference ${reference}.` : ""}${call.httpStatus ? ` HTTP ${call.httpStatus}.` : ""} SDK invocation metadata; automatic retries and billing are not a complete request ledger.`,
+    { model, ledgerId, providerCall: call },
+  );
 }
 export function validateTrail(events: AgentEvent[]): {
   valid: boolean;

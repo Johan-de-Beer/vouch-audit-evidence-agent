@@ -2,7 +2,7 @@
 
 Verified on 29 October 2026. This record covers the software and the synthetic demonstration; it does not establish live Meta inference quality or hackathon eligibility.
 
-- Local `npm run check`: 26 meaningful tests passed, production frontend compiled, deterministic fixture evaluation passed.
+- Local `npm run check`: 41 tests passed, production frontend compiled, deterministic fixture evaluation passed. New coverage includes bounded preflight failures, safe provider metadata, concurrent trace isolation and reproducible small validation packs.
 - [Fresh Ubuntu GitHub Actions run](https://github.com/Johan-de-Beer/vouch-audit-evidence-agent/actions/runs/40818623132): dependency installation, all tests, build and fixture evaluation passed from the public repository. The production Docker image also built and passed authentication/session checks, protected-file access and a complete synthetic run with valid hashes and seal.
 - HTTP smoke test: 14 checks passed, including real PDF multipart import and rasterization, Host/Origin rejection, explicit missing-key handling, complete workflow, review/notes and every export format.
 - Fixture results: 225/225 expected control results; all five planted scenarios found across six exception rows, producing seven exception findings. The VAT scenario also fails the invoice/PO gross-total comparison. No false positives or unsupported matches within this fixture.
@@ -10,8 +10,12 @@ Verified on 29 October 2026. This record covers the software and the synthetic d
 - ZIP evidence bundle: 981 entries, with a manifest mapping stored paths to archive entries. Every one of the 975 evidence file hashes was recomputed successfully.
 - Detailed PDF: all pages retain sample identity, continuation context, headers and page numbers. Representative normal, continuation and transposition pages were rendered with Poppler and visually inspected.
 - Desktop browser workflow: sample execution, exception filtering, source crop selection, human review and provider configuration were exercised in Chrome. At a true 390-pixel mobile viewport, the document's width remained 390 pixels with no horizontal overflow. [Desktop](screenshots/vouch-desktop.jpg) and [mobile](screenshots/vouch-mobile.jpg) screenshots retain the offline label. Temporary viewport overrides were cleared after testing.
+- All 75 source pages are selectable, including pages outside the selected sample. Browser QA opened the last page, checked its explicit out-of-sample notice, then inspected the fifteenth price-proof crop through the complete evidence list. The updated layout again remained 390 pixels wide at a 390-pixel viewport.
+- Six small validation packs passed actual multipart CSV/PDF ingestion and rasterization. Eighteen copied PDFs retain their original bytes, upload ZIP hashes reproduce, and expected outcomes stay outside upload inputs. Identifier/control checks use known synthetic fields only in a local in-memory clone; imported server engagements remain unanalysed, ready for live calls.
+- Real HTTP mock adapters verified retention of returned model IDs, request/response references, usage and failed-call status for chat, streamed SAM and voice. Those records exclude raw responses, prompts, headers and credentials; event hashes detect metadata edits. These are transport-contract tests, not real provider execution.
+- `npm run live:preflight -- --meta-only` correctly stopped at the absent credential with zero adapter calls. The retained report is explicitly **blocked**; no inference or segmentation success is claimed. Windows hidden-key configuration was exercised with invented keys for Meta-only, Baseten-only and both, preserving unrelated settings and round-tripping through dotenv.
 
-Retained machine-readable evidence: [evaluation](validation/evaluation.json), [API smoke report](validation/api-smoke.json), [PDF inspection](validation/pdf-qa.json).
+Retained machine-readable evidence: [evaluation](validation/evaluation.json), [API smoke report](validation/api-smoke.json), [PDF inspection](validation/pdf-qa.json), [small-pack import checks](validation/live-samples.json), [blocked credential preflight](validation/live-preflight.json).
 
 The independent reader's real transport is tested against a local mock. No Meta or Baseten key was supplied, no live inference was performed, and none of these numbers is a live model benchmark. The Baseten model default follows the authenticated hackathon guide's `meta-models/muse-spark-open-1026` requirement. Voice requires a supported WAV file and a real Meta key.
 

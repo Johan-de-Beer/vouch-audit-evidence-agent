@@ -57,7 +57,7 @@ The fixture has **25 ledger rows, 75 source documents and nine controls per row:
 
 The latest retained [evaluation](docs/validation/evaluation.json) passed 225/225 fixture assertions and found all five scenarios across six rows, producing seven exception findings. The VAT scenario also fails the invoice/PO gross-total comparison. There were no false positives in this fixture. **These are deterministic pipeline checks, not model accuracy, benchmark generalisation, or a measured productivity improvement.** Regenerate with `npm run eval`. See [dataset details](docs/DATASET.md).
 
-## Enable live models when credits arrive
+## Enable live models
 
 Set server-side environment values in `.env`, then restart:
 
@@ -67,6 +67,12 @@ BASETEN_API_KEY=<your Baseten key>
 ```
 
 Both keys are required for a live evidence run. Meta powers planning/extraction and SAM segmentation; Baseten provides a separate crop-only reread. Voice transcription requires the Meta key and can be tested separately. Keep keys out of browser code, screenshots, exported data and Git.
+
+On Windows, `./configure.ps1` prompts for both keys with hidden input and preserves other `.env` settings. Use `./configure.ps1 -Provider Meta` for Meta only, or leave a prompt blank to keep its current value. Meta may require the account's billing setup before enabling key creation; receiving credits alone does not establish API access.
+
+Run `npm run live:preflight -- --meta-only` for a bounded first Meta/SAM check. It creates a new fictional invoice and makes one extraction and one segmentation call, without changing an engagement or reading fixture answers. Once Baseten is configured, `npm run live:preflight` also independently rereads the total crop. Inspect the report under `artifacts/live-preflight/`; a failure, missing mask or uncertain result is not a successful live validation. These commands make real requests and may consume provider credits.
+
+Use `npm run samples:live` to generate six small import packs under `artifacts/live-samples/`: a clean row and each planted scenario, including the paired duplicate rows. Each pack separates upload inputs from expected outcomes and source hashes. Start with the clean pack before attempting the full dataset.
 
 | Environment variable | Default / purpose |
 | --- | --- |
@@ -98,7 +104,7 @@ Voice notes accept **mono 16-bit PCM WAV at 16 or 24 kHz**, up to ten minutes an
 
 React/Vite provides the ledger, source viewer, crop inspection, review queue and agent trace. Express coordinates ingestion and tools. SQLite stores engagement snapshots; files remain under `DATA_DIR`. A restart marks interrupted runs failed so they can be rerun. This is a single-server workspace with a shared access token, not per-user authorization.
 
-Live flow: validated plan → pixel extraction → SAM crop refinement → integer-cent arithmetic and three-way matching → independent crop reread → bounded retry or human escalation → working paper. Source/crop hashes and chained events accompany the results. The independent reader receives the crop and requested field name, without the ledger answer. Provider output is structurally validated; absent evidence, disagreement or low confidence remains unverified.
+Live flow: validated plan → pixel extraction → SAM crop refinement → integer-cent arithmetic and three-way matching → independent crop reread → bounded retry or human escalation → working paper. Source/crop hashes and chained events accompany the results. The independent reader receives the crop and requested field name, without the ledger answer. Provider output is structurally validated; absent evidence, disagreement or low confidence remains unverified. Live calls retain bounded execution metadata in the hash-chained trail: requested/returned model, request/response references, duration, status and token usage when supplied. This records SDK invocations, which may retry internally; it is not a complete billing ledger.
 
 ```powershell
 npm test

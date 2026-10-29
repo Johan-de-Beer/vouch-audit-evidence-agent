@@ -13,7 +13,8 @@ import type {
   TestName,
   Verification,
 } from "../shared/types.js";
-import { appendEvent, resultSeal } from "./trail.js";
+import { appendEvent, appendProviderEvent, resultSeal } from "./trail.js";
+import { withProviderTrace } from "./provider-trace.js";
 import { cents, normalise, sameValue } from "./money.js";
 import {
   extractFields,
@@ -464,6 +465,15 @@ export function associateDocuments(engagement: Engagement): void {
 }
 
 export async function runEngagement(
+  engagement: Engagement,
+  options: EngineOptions,
+): Promise<Engagement> {
+  return withProviderTrace(
+    (call) => { appendProviderEvent(engagement, call); },
+    () => executeEngagement(engagement, options),
+  );
+}
+async function executeEngagement(
   engagement: Engagement,
   options: EngineOptions,
 ): Promise<Engagement> {

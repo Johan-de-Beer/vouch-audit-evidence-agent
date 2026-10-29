@@ -11,7 +11,9 @@
     "test": "tsx --test tests/*.test.ts",
     "eval": "tsx scripts/evaluate.ts",
     "check": "npm run test && npm run build && npm run eval",
-    "smoke": "tsx scripts/smoke-test.ts"
+    "smoke": "tsx scripts/smoke-test.ts",
+    "live:preflight": "tsx scripts/live-preflight.ts",
+    "samples:live": "tsx scripts/build-live-samples.ts"
   },
   "dependencies": {
     "@fontsource/dm-sans": "5.3.0",

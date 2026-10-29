@@ -1,0 +1,927 @@
+{
+  "label": "Entirely fictional synthetic audit evidence. No employer, client or real-person data.",
+  "scope": "Import/rasterization and source-identifier association tests only. No model API calls.",
+  "inputManifestSha256": "ab2b26ce2666533496cf5c4a6dc3b41db5a36d1b8a29e4bb146c88cc5aebc3ac",
+  "baseUrl": "http://127.0.0.1:3001",
+  "timestamp": "2026-10-29T15:42:39.734Z",
+  "passed": true,
+  "results": [
+    {
+      "id": "01-clean",
+      "passed": true,
+      "engagementId": "98b86350-bc11-48aa-bb68-dc921e471370",
+      "ledgerRows": 1,
+      "sourceDocuments": 3,
+      "deterministicExceptionClaims": 0,
+      "associationMode": "Real multipart PDF ingestion; known synthetic field values injected into a LOCAL IN-MEMORY CLONE only. No extraction or model accuracy claimed. Server engagement remains untouched and ready for real live extraction.",
+      "details": {
+        "documentRoles": [
+          "invoice",
+          "po",
+          "grn"
+        ],
+        "associations": [
+          {
+            "name": "L001-invoice.pdf",
+            "ledgerId": "L001"
+          },
+          {
+            "name": "L001-po.pdf",
+            "ledgerId": "L001"
+          },
+          {
+            "name": "L001-grn.pdf",
+            "ledgerId": "L001"
+          }
+        ],
+        "sourceApplicability": [
+          {
+            "name": "L001-invoice.pdf",
+            "ledgerIds": [
+              "L001"
+            ]
+          },
+          {
+            "name": "L001-po.pdf",
+            "ledgerIds": [
+              "L001"
+            ]
+          },
+          {
+            "name": "L001-grn.pdf",
+            "ledgerIds": [
+              "L001"
+            ]
+          }
+        ],
+        "controls": [
+          {
+            "ledgerId": "L001",
+            "test": "amount",
+            "result": "match",
+            "sourceFieldCount": 4,
+            "sourceDocumentIds": [
+              "b72da1c2-0687-40c5-8aaa-6f921e0e4eec-1"
+            ]
+          },
+          {
+            "ledgerId": "L001",
+            "test": "date",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "b72da1c2-0687-40c5-8aaa-6f921e0e4eec-1"
+            ]
+          },
+          {
+            "ledgerId": "L001",
+            "test": "invoice_no",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "b72da1c2-0687-40c5-8aaa-6f921e0e4eec-1"
+            ]
+          },
+          {
+            "ledgerId": "L001",
+            "test": "approval",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "b72da1c2-0687-40c5-8aaa-6f921e0e4eec-1"
+            ]
+          },
+          {
+            "ledgerId": "L001",
+            "test": "vendor",
+            "result": "match",
+            "sourceFieldCount": 7,
+            "sourceDocumentIds": [
+              "b72da1c2-0687-40c5-8aaa-6f921e0e4eec-1",
+              "dfbf3a7d-6985-47f7-9e86-d61fbb5c46bb-1",
+              "92d02689-94f4-4fce-bd81-0a1881793326-1"
+            ]
+          },
+          {
+            "ledgerId": "L001",
+            "test": "vat",
+            "result": "match",
+            "sourceFieldCount": 6,
+            "sourceDocumentIds": [
+              "b72da1c2-0687-40c5-8aaa-6f921e0e4eec-1"
+            ]
+          },
+          {
+            "ledgerId": "L001",
+            "test": "quantity",
+            "result": "match",
+            "sourceFieldCount": 10,
+            "sourceDocumentIds": [
+              "b72da1c2-0687-40c5-8aaa-6f921e0e4eec-1",
+              "dfbf3a7d-6985-47f7-9e86-d61fbb5c46bb-1",
+              "92d02689-94f4-4fce-bd81-0a1881793326-1"
+            ]
+          },
+          {
+            "ledgerId": "L001",
+            "test": "price",
+            "result": "match",
+            "sourceFieldCount": 15,
+            "sourceDocumentIds": [
+              "b72da1c2-0687-40c5-8aaa-6f921e0e4eec-1",
+              "dfbf3a7d-6985-47f7-9e86-d61fbb5c46bb-1"
+            ]
+          },
+          {
+            "ledgerId": "L001",
+            "test": "duplicate",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "b72da1c2-0687-40c5-8aaa-6f921e0e4eec-1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "02-amount",
+      "passed": true,
+      "engagementId": "8d0ad063-d8ce-4e69-8b5e-cc587a27c4e9",
+      "ledgerRows": 1,
+      "sourceDocuments": 3,
+      "deterministicExceptionClaims": 1,
+      "associationMode": "Real multipart PDF ingestion; known synthetic field values injected into a LOCAL IN-MEMORY CLONE only. No extraction or model accuracy claimed. Server engagement remains untouched and ready for real live extraction.",
+      "details": {
+        "documentRoles": [
+          "invoice",
+          "po",
+          "grn"
+        ],
+        "associations": [
+          {
+            "name": "L003-invoice.pdf",
+            "ledgerId": "L003"
+          },
+          {
+            "name": "L003-po.pdf",
+            "ledgerId": "L003"
+          },
+          {
+            "name": "L003-grn.pdf",
+            "ledgerId": "L003"
+          }
+        ],
+        "sourceApplicability": [
+          {
+            "name": "L003-invoice.pdf",
+            "ledgerIds": [
+              "L003"
+            ]
+          },
+          {
+            "name": "L003-po.pdf",
+            "ledgerIds": [
+              "L003"
+            ]
+          },
+          {
+            "name": "L003-grn.pdf",
+            "ledgerIds": [
+              "L003"
+            ]
+          }
+        ],
+        "controls": [
+          {
+            "ledgerId": "L003",
+            "test": "amount",
+            "result": "exception",
+            "sourceFieldCount": 4,
+            "sourceDocumentIds": [
+              "cdc41f6a-37f1-4a1c-aa6f-f78f13e5daac-1"
+            ]
+          },
+          {
+            "ledgerId": "L003",
+            "test": "date",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "cdc41f6a-37f1-4a1c-aa6f-f78f13e5daac-1"
+            ]
+          },
+          {
+            "ledgerId": "L003",
+            "test": "invoice_no",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "cdc41f6a-37f1-4a1c-aa6f-f78f13e5daac-1"
+            ]
+          },
+          {
+            "ledgerId": "L003",
+            "test": "approval",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "cdc41f6a-37f1-4a1c-aa6f-f78f13e5daac-1"
+            ]
+          },
+          {
+            "ledgerId": "L003",
+            "test": "vendor",
+            "result": "match",
+            "sourceFieldCount": 7,
+            "sourceDocumentIds": [
+              "cdc41f6a-37f1-4a1c-aa6f-f78f13e5daac-1",
+              "f34d812d-3565-4759-960f-534c27ea6fe9-1",
+              "12eb1d6e-3969-43f5-bcde-7d45856ea9ff-1"
+            ]
+          },
+          {
+            "ledgerId": "L003",
+            "test": "vat",
+            "result": "match",
+            "sourceFieldCount": 6,
+            "sourceDocumentIds": [
+              "cdc41f6a-37f1-4a1c-aa6f-f78f13e5daac-1"
+            ]
+          },
+          {
+            "ledgerId": "L003",
+            "test": "quantity",
+            "result": "match",
+            "sourceFieldCount": 10,
+            "sourceDocumentIds": [
+              "cdc41f6a-37f1-4a1c-aa6f-f78f13e5daac-1",
+              "f34d812d-3565-4759-960f-534c27ea6fe9-1",
+              "12eb1d6e-3969-43f5-bcde-7d45856ea9ff-1"
+            ]
+          },
+          {
+            "ledgerId": "L003",
+            "test": "price",
+            "result": "match",
+            "sourceFieldCount": 15,
+            "sourceDocumentIds": [
+              "cdc41f6a-37f1-4a1c-aa6f-f78f13e5daac-1",
+              "f34d812d-3565-4759-960f-534c27ea6fe9-1"
+            ]
+          },
+          {
+            "ledgerId": "L003",
+            "test": "duplicate",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "cdc41f6a-37f1-4a1c-aa6f-f78f13e5daac-1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "03-vat",
+      "passed": true,
+      "engagementId": "da6439d3-0b29-4057-85ff-02dcc5cc5cca",
+      "ledgerRows": 1,
+      "sourceDocuments": 3,
+      "deterministicExceptionClaims": 2,
+      "associationMode": "Real multipart PDF ingestion; known synthetic field values injected into a LOCAL IN-MEMORY CLONE only. No extraction or model accuracy claimed. Server engagement remains untouched and ready for real live extraction.",
+      "details": {
+        "documentRoles": [
+          "invoice",
+          "po",
+          "grn"
+        ],
+        "associations": [
+          {
+            "name": "L007-invoice.pdf",
+            "ledgerId": "L007"
+          },
+          {
+            "name": "L007-po.pdf",
+            "ledgerId": "L007"
+          },
+          {
+            "name": "L007-grn.pdf",
+            "ledgerId": "L007"
+          }
+        ],
+        "sourceApplicability": [
+          {
+            "name": "L007-invoice.pdf",
+            "ledgerIds": [
+              "L007"
+            ]
+          },
+          {
+            "name": "L007-po.pdf",
+            "ledgerIds": [
+              "L007"
+            ]
+          },
+          {
+            "name": "L007-grn.pdf",
+            "ledgerIds": [
+              "L007"
+            ]
+          }
+        ],
+        "controls": [
+          {
+            "ledgerId": "L007",
+            "test": "amount",
+            "result": "match",
+            "sourceFieldCount": 4,
+            "sourceDocumentIds": [
+              "a392e9c8-5fbd-427e-94e5-7c5e438abf82-1"
+            ]
+          },
+          {
+            "ledgerId": "L007",
+            "test": "date",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "a392e9c8-5fbd-427e-94e5-7c5e438abf82-1"
+            ]
+          },
+          {
+            "ledgerId": "L007",
+            "test": "invoice_no",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "a392e9c8-5fbd-427e-94e5-7c5e438abf82-1"
+            ]
+          },
+          {
+            "ledgerId": "L007",
+            "test": "approval",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "a392e9c8-5fbd-427e-94e5-7c5e438abf82-1"
+            ]
+          },
+          {
+            "ledgerId": "L007",
+            "test": "vendor",
+            "result": "match",
+            "sourceFieldCount": 7,
+            "sourceDocumentIds": [
+              "a392e9c8-5fbd-427e-94e5-7c5e438abf82-1",
+              "dee5b6b1-787a-4492-b61b-8b657ba6c703-1",
+              "26674b8c-83e5-4fa7-afb9-649804dfe104-1"
+            ]
+          },
+          {
+            "ledgerId": "L007",
+            "test": "vat",
+            "result": "exception",
+            "sourceFieldCount": 6,
+            "sourceDocumentIds": [
+              "a392e9c8-5fbd-427e-94e5-7c5e438abf82-1"
+            ]
+          },
+          {
+            "ledgerId": "L007",
+            "test": "quantity",
+            "result": "match",
+            "sourceFieldCount": 10,
+            "sourceDocumentIds": [
+              "a392e9c8-5fbd-427e-94e5-7c5e438abf82-1",
+              "dee5b6b1-787a-4492-b61b-8b657ba6c703-1",
+              "26674b8c-83e5-4fa7-afb9-649804dfe104-1"
+            ]
+          },
+          {
+            "ledgerId": "L007",
+            "test": "price",
+            "result": "exception",
+            "sourceFieldCount": 15,
+            "sourceDocumentIds": [
+              "a392e9c8-5fbd-427e-94e5-7c5e438abf82-1",
+              "dee5b6b1-787a-4492-b61b-8b657ba6c703-1"
+            ]
+          },
+          {
+            "ledgerId": "L007",
+            "test": "duplicate",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "a392e9c8-5fbd-427e-94e5-7c5e438abf82-1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "04-quantity",
+      "passed": true,
+      "engagementId": "41dc1632-e7f9-4caa-9de3-bd853d964f84",
+      "ledgerRows": 1,
+      "sourceDocuments": 3,
+      "deterministicExceptionClaims": 1,
+      "associationMode": "Real multipart PDF ingestion; known synthetic field values injected into a LOCAL IN-MEMORY CLONE only. No extraction or model accuracy claimed. Server engagement remains untouched and ready for real live extraction.",
+      "details": {
+        "documentRoles": [
+          "invoice",
+          "po",
+          "grn"
+        ],
+        "associations": [
+          {
+            "name": "L012-invoice.pdf",
+            "ledgerId": "L012"
+          },
+          {
+            "name": "L012-po.pdf",
+            "ledgerId": "L012"
+          },
+          {
+            "name": "L012-grn.pdf",
+            "ledgerId": "L012"
+          }
+        ],
+        "sourceApplicability": [
+          {
+            "name": "L012-invoice.pdf",
+            "ledgerIds": [
+              "L012"
+            ]
+          },
+          {
+            "name": "L012-po.pdf",
+            "ledgerIds": [
+              "L012"
+            ]
+          },
+          {
+            "name": "L012-grn.pdf",
+            "ledgerIds": [
+              "L012"
+            ]
+          }
+        ],
+        "controls": [
+          {
+            "ledgerId": "L012",
+            "test": "amount",
+            "result": "match",
+            "sourceFieldCount": 4,
+            "sourceDocumentIds": [
+              "a74f5596-7ecc-4a0c-82a3-f722daebee00-1"
+            ]
+          },
+          {
+            "ledgerId": "L012",
+            "test": "date",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "a74f5596-7ecc-4a0c-82a3-f722daebee00-1"
+            ]
+          },
+          {
+            "ledgerId": "L012",
+            "test": "invoice_no",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "a74f5596-7ecc-4a0c-82a3-f722daebee00-1"
+            ]
+          },
+          {
+            "ledgerId": "L012",
+            "test": "approval",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "a74f5596-7ecc-4a0c-82a3-f722daebee00-1"
+            ]
+          },
+          {
+            "ledgerId": "L012",
+            "test": "vendor",
+            "result": "match",
+            "sourceFieldCount": 7,
+            "sourceDocumentIds": [
+              "a74f5596-7ecc-4a0c-82a3-f722daebee00-1",
+              "f02f4158-c12e-425e-a0b9-0dd9e9cfabf6-1",
+              "f0608730-d942-4c3e-86dd-3becc66b0c13-1"
+            ]
+          },
+          {
+            "ledgerId": "L012",
+            "test": "vat",
+            "result": "match",
+            "sourceFieldCount": 6,
+            "sourceDocumentIds": [
+              "a74f5596-7ecc-4a0c-82a3-f722daebee00-1"
+            ]
+          },
+          {
+            "ledgerId": "L012",
+            "test": "quantity",
+            "result": "exception",
+            "sourceFieldCount": 10,
+            "sourceDocumentIds": [
+              "a74f5596-7ecc-4a0c-82a3-f722daebee00-1",
+              "f02f4158-c12e-425e-a0b9-0dd9e9cfabf6-1",
+              "f0608730-d942-4c3e-86dd-3becc66b0c13-1"
+            ]
+          },
+          {
+            "ledgerId": "L012",
+            "test": "price",
+            "result": "match",
+            "sourceFieldCount": 15,
+            "sourceDocumentIds": [
+              "a74f5596-7ecc-4a0c-82a3-f722daebee00-1",
+              "f02f4158-c12e-425e-a0b9-0dd9e9cfabf6-1"
+            ]
+          },
+          {
+            "ledgerId": "L012",
+            "test": "duplicate",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "a74f5596-7ecc-4a0c-82a3-f722daebee00-1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "05-approval",
+      "passed": true,
+      "engagementId": "c35e6801-12cd-41bc-95a3-7f5cf4b11516",
+      "ledgerRows": 1,
+      "sourceDocuments": 3,
+      "deterministicExceptionClaims": 1,
+      "associationMode": "Real multipart PDF ingestion; known synthetic field values injected into a LOCAL IN-MEMORY CLONE only. No extraction or model accuracy claimed. Server engagement remains untouched and ready for real live extraction.",
+      "details": {
+        "documentRoles": [
+          "invoice",
+          "po",
+          "grn"
+        ],
+        "associations": [
+          {
+            "name": "L017-invoice.pdf",
+            "ledgerId": "L017"
+          },
+          {
+            "name": "L017-po.pdf",
+            "ledgerId": "L017"
+          },
+          {
+            "name": "L017-grn.pdf",
+            "ledgerId": "L017"
+          }
+        ],
+        "sourceApplicability": [
+          {
+            "name": "L017-invoice.pdf",
+            "ledgerIds": [
+              "L017"
+            ]
+          },
+          {
+            "name": "L017-po.pdf",
+            "ledgerIds": [
+              "L017"
+            ]
+          },
+          {
+            "name": "L017-grn.pdf",
+            "ledgerIds": [
+              "L017"
+            ]
+          }
+        ],
+        "controls": [
+          {
+            "ledgerId": "L017",
+            "test": "amount",
+            "result": "match",
+            "sourceFieldCount": 4,
+            "sourceDocumentIds": [
+              "41c50a57-95fe-4075-9af2-658c6cc8de9f-1"
+            ]
+          },
+          {
+            "ledgerId": "L017",
+            "test": "date",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "41c50a57-95fe-4075-9af2-658c6cc8de9f-1"
+            ]
+          },
+          {
+            "ledgerId": "L017",
+            "test": "invoice_no",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "41c50a57-95fe-4075-9af2-658c6cc8de9f-1"
+            ]
+          },
+          {
+            "ledgerId": "L017",
+            "test": "approval",
+            "result": "exception",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "41c50a57-95fe-4075-9af2-658c6cc8de9f-1"
+            ]
+          },
+          {
+            "ledgerId": "L017",
+            "test": "vendor",
+            "result": "match",
+            "sourceFieldCount": 7,
+            "sourceDocumentIds": [
+              "41c50a57-95fe-4075-9af2-658c6cc8de9f-1",
+              "1ecd189d-2e43-42d6-80a3-4da9d8cee55a-1",
+              "0a4d5e74-4ec2-475d-87b7-7ddc2bf11820-1"
+            ]
+          },
+          {
+            "ledgerId": "L017",
+            "test": "vat",
+            "result": "match",
+            "sourceFieldCount": 6,
+            "sourceDocumentIds": [
+              "41c50a57-95fe-4075-9af2-658c6cc8de9f-1"
+            ]
+          },
+          {
+            "ledgerId": "L017",
+            "test": "quantity",
+            "result": "match",
+            "sourceFieldCount": 10,
+            "sourceDocumentIds": [
+              "41c50a57-95fe-4075-9af2-658c6cc8de9f-1",
+              "1ecd189d-2e43-42d6-80a3-4da9d8cee55a-1",
+              "0a4d5e74-4ec2-475d-87b7-7ddc2bf11820-1"
+            ]
+          },
+          {
+            "ledgerId": "L017",
+            "test": "price",
+            "result": "match",
+            "sourceFieldCount": 15,
+            "sourceDocumentIds": [
+              "41c50a57-95fe-4075-9af2-658c6cc8de9f-1",
+              "1ecd189d-2e43-42d6-80a3-4da9d8cee55a-1"
+            ]
+          },
+          {
+            "ledgerId": "L017",
+            "test": "duplicate",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "41c50a57-95fe-4075-9af2-658c6cc8de9f-1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "06-duplicate",
+      "passed": true,
+      "engagementId": "fc3eae59-f8e3-4042-bb35-cc68f0d4ae59",
+      "ledgerRows": 2,
+      "sourceDocuments": 3,
+      "deterministicExceptionClaims": 2,
+      "associationMode": "Real multipart PDF ingestion; known synthetic field values injected into a LOCAL IN-MEMORY CLONE only. No extraction or model accuracy claimed. Server engagement remains untouched and ready for real live extraction.",
+      "details": {
+        "documentRoles": [
+          "invoice",
+          "po",
+          "grn"
+        ],
+        "associations": [
+          {
+            "name": "L021-invoice.pdf",
+            "ledgerId": null
+          },
+          {
+            "name": "L021-po.pdf",
+            "ledgerId": null
+          },
+          {
+            "name": "L021-grn.pdf",
+            "ledgerId": null
+          }
+        ],
+        "sourceApplicability": [
+          {
+            "name": "L021-invoice.pdf",
+            "ledgerIds": [
+              "L021",
+              "L022"
+            ]
+          },
+          {
+            "name": "L021-po.pdf",
+            "ledgerIds": [
+              "L021",
+              "L022"
+            ]
+          },
+          {
+            "name": "L021-grn.pdf",
+            "ledgerIds": [
+              "L021",
+              "L022"
+            ]
+          }
+        ],
+        "controls": [
+          {
+            "ledgerId": "L021",
+            "test": "amount",
+            "result": "match",
+            "sourceFieldCount": 4,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          },
+          {
+            "ledgerId": "L021",
+            "test": "date",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          },
+          {
+            "ledgerId": "L021",
+            "test": "invoice_no",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          },
+          {
+            "ledgerId": "L021",
+            "test": "approval",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          },
+          {
+            "ledgerId": "L021",
+            "test": "vendor",
+            "result": "match",
+            "sourceFieldCount": 7,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1",
+              "6edfb95e-f214-477b-bdb1-55e445ae4db4-1",
+              "e4b51a82-9e45-474f-a98a-73c909db91b3-1"
+            ]
+          },
+          {
+            "ledgerId": "L021",
+            "test": "vat",
+            "result": "match",
+            "sourceFieldCount": 6,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          },
+          {
+            "ledgerId": "L021",
+            "test": "quantity",
+            "result": "match",
+            "sourceFieldCount": 10,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1",
+              "6edfb95e-f214-477b-bdb1-55e445ae4db4-1",
+              "e4b51a82-9e45-474f-a98a-73c909db91b3-1"
+            ]
+          },
+          {
+            "ledgerId": "L021",
+            "test": "price",
+            "result": "match",
+            "sourceFieldCount": 15,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1",
+              "6edfb95e-f214-477b-bdb1-55e445ae4db4-1"
+            ]
+          },
+          {
+            "ledgerId": "L021",
+            "test": "duplicate",
+            "result": "exception",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          },
+          {
+            "ledgerId": "L022",
+            "test": "amount",
+            "result": "match",
+            "sourceFieldCount": 4,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          },
+          {
+            "ledgerId": "L022",
+            "test": "date",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          },
+          {
+            "ledgerId": "L022",
+            "test": "invoice_no",
+            "result": "match",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          },
+          {
+            "ledgerId": "L022",
+            "test": "approval",
+            "result": "match",
+            "sourceFieldCount": 3,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          },
+          {
+            "ledgerId": "L022",
+            "test": "vendor",
+            "result": "match",
+            "sourceFieldCount": 7,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1",
+              "6edfb95e-f214-477b-bdb1-55e445ae4db4-1",
+              "e4b51a82-9e45-474f-a98a-73c909db91b3-1"
+            ]
+          },
+          {
+            "ledgerId": "L022",
+            "test": "vat",
+            "result": "match",
+            "sourceFieldCount": 6,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          },
+          {
+            "ledgerId": "L022",
+            "test": "quantity",
+            "result": "match",
+            "sourceFieldCount": 10,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1",
+              "6edfb95e-f214-477b-bdb1-55e445ae4db4-1",
+              "e4b51a82-9e45-474f-a98a-73c909db91b3-1"
+            ]
+          },
+          {
+            "ledgerId": "L022",
+            "test": "price",
+            "result": "match",
+            "sourceFieldCount": 15,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1",
+              "6edfb95e-f214-477b-bdb1-55e445ae4db4-1"
+            ]
+          },
+          {
+            "ledgerId": "L022",
+            "test": "duplicate",
+            "result": "exception",
+            "sourceFieldCount": 2,
+            "sourceDocumentIds": [
+              "09a3bd2f-a8b0-429f-84dd-33a83f7639b4-1"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

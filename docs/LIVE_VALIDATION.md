@@ -2,9 +2,9 @@
 
 **Current status: NOT RUN.** No Meta or Baseten credentials were supplied for this build. Offline fixture tests and mocked provider tests are useful engineering checks; neither proves a live provider integration worked.
 
-The authenticated [participant guide](https://cerebralvalley.ai/e/meta-ai-developer-hackathon/details), inspected on 29 October, makes actual Meta API or Meta open-weight use a Stage 1 pass/fail requirement. Live validation is therefore required before claiming submission readiness. The guide requires a public GitHub repository and a three-minute video showing only hackathon-built functionality; both publication artifacts remain pending.
+The authenticated [participant guide](https://cerebralvalley.ai/e/meta-ai-developer-hackathon/details), inspected on 29 October, makes actual Meta API or Meta open-weight use a Stage 1 pass/fail requirement. Live validation is therefore required before claiming submission readiness. The required [public GitHub repository](https://github.com/Johan-de-Beer/vouch-audit-evidence-agent) is published. The required three-minute video showing only hackathon-built functionality remains unrecorded.
 
-Use this checklist after credits arrive. Start with fictional source documents. A model's name, an installed parser package, or a key-present badge is not execution evidence.
+The participant has reported receiving credits. On 29 October the Meta API-key page still showed **No payment method on file**, a disabled **Create API key** button and no keys. Billing/key setup must be completed before requests can be tested. Start with fictional source documents. A model's name, an installed parser package, or a key-present badge is not execution evidence.
 
 ## Configure and restart
 
@@ -13,11 +13,17 @@ Use this checklist after credits arrive. Start with fictional source documents. 
 3. Restart the server so it reads the new environment. Open **Models & connections**. Both provider badges must show configured for a live evidence run.
 4. Preserve the passing offline evaluation separately. Create a fresh engagement for live work; do not overwrite a fixture score with an unrelated live score.
 
+On Windows, `./configure.ps1 -Provider Meta` accepts the key in a hidden local prompt; `./configure.ps1` prompts for both providers. It does not create credentials, alter billing or make network calls. Blank input preserves the current value. Keep `.env` out of recordings.
+
 Credit claiming is an individual form processed in batches. The guide says applying Meta credits requires a card and may involve a temporary preauthorization. Review the linked credit terms personally, and monitor actual usage: a spend-limit notification is not a guaranteed hard cap. No credit claim or billing action was performed during implementation.
 
 The baseline Meta request uses `https://api.meta.ai/v1` and `muse-spark-1.3`, as documented in the [Meta quickstart](https://dev.meta.ai/docs/quickstart). Meta extraction uses JSON-schema output; see [structured output](https://dev.meta.ai/docs/structured-output). Baseten's [feature-support documentation](https://docs.baseten.co/inference/model-apis/overview#feature-support) explicitly excludes Muse Spark Open from structured outputs and JSON mode. Its reader must request JSON through the prompt, omit unsupported `response_format` options, and validate the returned text locally. Invalid output must remain unverified. Validate actual request compatibility rather than assuming SDK compatibility covers every model.
 
 ## Small smoke test
+
+First run `npm run live:preflight -- --meta-only`. It renders a new fictional invoice, then requests one extraction and one SAM region for the extracted total. It reads no fixture answers and does not mutate engagements. Add Baseten and run `npm run live:preflight` to include a crop-only second read. Retain `artifacts/live-preflight/latest.json` and its source/mask/crop files. Success is limited to these calls and this synthetic source; it does not prove the full audit pipeline or model quality. Each invocation makes real requests and can consume credits.
+
+Generate bounded import packs with `npm run samples:live`. Under `artifacts/live-samples/`, use the clean sample first, then the isolated amount, VAT, short-delivery, missing-approval and paired-duplicate packs. Upload only a pack's input CSV and PDFs. Expected findings are stored separately for manual scoring and must never enter extraction or verification prompts.
 
 Import one synthetic ledger row with its invoice, PO and GRN from `data/demo`, using the downloaded CSV template to make a one-row ledger. Choose a non-exception row first. Uploaded documents are stored as a live engagement; use filenames that preserve their invoice/PO/GRN roles. Select **Live Meta + Baseten API** and run checks.
 
@@ -66,6 +72,6 @@ Download PDF, standalone HTML, JSON, JSONL and ZIP after a successful live run. 
 | Manually scored claims / exceptions / abstentions | NOT MEASURED |
 | Crop correctness review | NOT RUN |
 | Export / restart / integrity review | NOT RUN FOR LIVE OUTPUT |
-| Failures, retries and unresolved gaps | Credentials pending |
+| Failures, retries and unresolved gaps | Credits reported received; Meta billing/key setup and Baseten key pending |
 
-Never replace these statuses with estimates. Provider token usage/cost is not currently persisted as a complete per-request billing ledger by the app; retain provider-side records separately if needed. Do not expose secret headers while collecting them.
+Never replace these statuses with estimates. Successful and failed provider SDK invocations retain allowlisted execution metadata in hash-chained events and the preflight report: requested/returned model, request/response references, duration, status and token counts when supplied. Missing metadata remains absent. Streaming SAM metadata is captured only when the provider emits it. The SDK may retry internally, and token counts do not establish actual charges; retain provider-side billing records separately. Prompts, raw provider responses, headers and credentials are excluded from this metadata.

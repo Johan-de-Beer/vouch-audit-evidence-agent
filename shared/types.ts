@@ -12,6 +12,19 @@ export type TestName =
   | "price";
 export type Result = "match" | "exception" | "unverified";
 export type BBox = [number, number, number, number]; // x, y, width, height in pixels
+export interface ProviderCall {
+  provider: "meta" | "baseten";
+  operation: "plan" | "extract" | "segment" | "verify" | "transcribe";
+  requestedModel: string;
+  returnedModel?: string;
+  responseId?: string;
+  requestId?: string;
+  startedAt: string;
+  durationMs: number;
+  outcome: "success" | "failed";
+  httpStatus?: number;
+  usage?: { inputTokens?: number; outputTokens?: number; totalTokens?: number };
+}
 export interface LedgerLine {
   id: string;
   date: string;
@@ -104,6 +117,7 @@ export interface AgentEvent {
   message: string;
   ledgerId?: string;
   model?: string;
+  providerCall?: ProviderCall;
   previousHash: string;
   hash: string;
 }

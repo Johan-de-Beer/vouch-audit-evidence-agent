@@ -60,7 +60,7 @@ The implementation contains adapters for Muse Spark 1.3 planning and structured 
 
 The verifier receives a source crop and requested field name without the ledger answer. Deterministic code performs arithmetic and comparisons. Missing, disputed or low-confidence evidence remains unverified for a reviewer. Offline fixture mode uses labelled known fields and simulated rereads and makes no provider calls.
 
-**Runtime disclosure:** Meta credits/credentials are pending. No successful real Meta extraction, SAM segmentation, independent Baseten reread or voice transcription has been observed. This answer must be updated with actual run provenance after live validation before claiming the actual-use requirement is met.
+**Runtime disclosure:** The participant reports receiving Meta credits; billing/key setup and Baseten credentials remain pending. No successful real Meta extraction, SAM segmentation, independent Baseten reread or voice transcription has been observed. This answer must be updated with actual run provenance after live validation before claiming the actual-use requirement is met.
 
 ## Why Meta models were important
 
@@ -74,7 +74,7 @@ No live quality, latency, cost or productivity advantage is claimed until measur
 
 **Current truthful draft:**
 
-We implemented against the published Meta API and SAM protocol documentation and exercised request/response handling with local mock contracts. We are still awaiting credits and have not completed real API calls. We therefore cannot yet provide feedback about live model performance, rate limits, billing behavior or reliability. After activation, we will validate a small synthetic sample, inspect masks/crop reads manually and record actual failures or limitations.
+We implemented against the published Meta API and SAM protocol documentation and exercised request/response handling with local mock contracts. Credits have been reported received, but account billing/key setup remains incomplete and we have not completed real API calls. We therefore cannot yet provide feedback about live model performance, rate limits or inference reliability. After activation, we will validate a small synthetic sample, inspect masks/crop reads manually and record actual failures or limitations.
 
 Do not substitute imagined praise, complaints or performance measurements for observed experience. Update this field after a real run if time permits.
 

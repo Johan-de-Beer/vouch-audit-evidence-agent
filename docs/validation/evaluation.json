@@ -1,8 +1,8 @@
 {
   "label": "Synthetic fixture pipeline evaluation (NOT live Meta model accuracy)",
-  "timestamp": "2026-10-29T04:33:33.306Z",
+  "timestamp": "2026-10-29T15:46:25.921Z",
   "mode": "demo",
-  "elapsedMs": 4962,
+  "elapsedMs": 5411,
   "ledgerLines": 25,
   "documents": 75,
   "claims": 225,

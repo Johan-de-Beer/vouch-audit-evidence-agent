@@ -1,9 +1,9 @@
 {
   "base": "http://127.0.0.1:3001",
   "passed": true,
-  "timestamp": "2026-10-29T04:33:56.242Z",
-  "demoEngagementId": "128b10a5-1683-42ea-afb6-747b0f4a8f0a",
-  "importEngagementId": "a1aa1656-ae1c-4fb7-a77c-43d7522dbf6c",
+  "timestamp": "2026-10-29T15:48:35.222Z",
+  "demoEngagementId": "ed931b7b-a573-48ce-a032-e31fd4f74c4b",
+  "importEngagementId": "ca2243b7-aefa-4265-aa1a-654f8760e37d",
   "checks": [
     {
       "name": "Health",
@@ -20,7 +20,7 @@
     {
       "name": "Synthetic sample creation",
       "passed": true,
-      "detail": "128b10a5-1683-42ea-afb6-747b0f4a8f0a"
+      "detail": "ed931b7b-a573-48ce-a032-e31fd4f74c4b"
     },
     {
       "name": "End-to-end synthetic run",
@@ -58,7 +58,7 @@
     {
       "name": "Actual PDF multipart import renders a verified PNG page",
       "passed": true,
-      "detail": "a1aa1656-ae1c-4fb7-a77c-43d7522dbf6c"
+      "detail": "ca2243b7-aefa-4265-aa1a-654f8760e37d"
     },
     {
       "name": "Live execution without credentials fails explicitly",

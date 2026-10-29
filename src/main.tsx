@@ -45,6 +45,7 @@ import type {
   LedgerLine,
   Settings,
   Review,
+  ProviderCall,
 } from "../shared/types";
 import "@fontsource/dm-sans/latin-400.css";
 import "@fontsource/dm-sans/latin-500.css";
@@ -90,6 +91,12 @@ const date = (s: string) =>
     month: "short",
     year: "numeric",
   });
+const documentRole = (type: Document["type"]) =>
+  type === "po"
+    ? "Purchase order"
+    : type === "grn"
+      ? "Goods received"
+      : nice(type);
 type Tab = "evidence" | "review" | "trace" | "integrity";
 function status(e: Engagement, l: LedgerLine) {
   const cs = e.claims.filter((c) => c.ledgerId === l.id);
@@ -277,9 +284,12 @@ function App() {
             String(f.value) === line?.invoice_no,
         ),
     ) || [];
-  const docs = lineDocs.length ? lineDocs : e?.documents || [];
+  const allDocs = e?.documents || [];
+  const relatedDocIds = new Set(lineDocs.map((d) => d.id));
+  const otherDocs = allDocs.filter((d) => !relatedDocIds.has(d.id));
+  const docs = lineDocs.length ? lineDocs : allDocs;
   const doc =
-    docs.find((d) => d.id === docId) ||
+    allDocs.find((d) => d.id === docId) ||
     docs.find((d) => d.type === "invoice") ||
     docs[0];
   const crops = e?.crops.filter((c) => c.docId === doc?.id) || [];
@@ -806,7 +816,7 @@ function App() {
                       <h2>
                         {line?.invoice_no || "Document viewer"}
                         <span className="document-count">
-                          {docs.length} docs
+                          {lineDocs.length ? `${lineDocs.length} related` : `${allDocs.length} pages`}
                         </span>
                       </h2>
                     </div>
@@ -819,41 +829,60 @@ function App() {
                       <Maximize2 size={17} />
                     </button>
                   </div>
-                  <div className="document-tabs">
+                  <div className="document-tabs" aria-label="Related source pages">
                     {docs.slice(0, 8).map((d) => (
                       <button
                         key={d.id}
                         className={doc?.id === d.id ? "selected" : ""}
+                        title={d.name}
+                        aria-pressed={doc?.id === d.id}
                         onClick={() => {
                           setDocId(d.id);
                           setFocusCrop("");
                         }}
                       >
-                        {d.type === "po"
-                          ? "Purchase order"
-                          : d.type === "grn"
-                            ? "Goods received"
-                            : nice(d.type)}
+                        {documentRole(d.type)}
                         {d.pages > 1 ? " · " + d.pages : ""}
                       </button>
                     ))}
                   </div>
-                  {docs.length > 8 && (
-                    <select
-                      className="source-select"
-                      aria-label="Source document"
-                      value={doc?.id || ""}
-                      onChange={(event) => {
-                        setDocId(event.target.value);
-                        setFocusCrop("");
-                      }}
-                    >
-                      {docs.map((d) => (
-                        <option key={d.id} value={d.id}>
-                          {d.name}
-                        </option>
-                      ))}
-                    </select>
+                  {allDocs.length > 1 && (
+                    <label className="source-picker">
+                      <span>Browse all {allDocs.length} source pages</span>
+                      <select
+                        className="source-select"
+                        aria-label="Source document"
+                        value={doc?.id || ""}
+                        onChange={(event) => {
+                          setDocId(event.target.value);
+                          setFocusCrop("");
+                        }}
+                      >
+                        {lineDocs.length > 0 && (
+                          <optgroup label={`Selected sample · ${line?.id || "sources"}`}>
+                            {lineDocs.map((d) => (
+                              <option key={d.id} value={d.id}>
+                                {documentRole(d.type)} · {d.name}
+                              </option>
+                            ))}
+                          </optgroup>
+                        )}
+                        {otherDocs.length > 0 && (
+                          <optgroup label={lineDocs.length ? "Other source pages" : "All source pages"}>
+                            {otherDocs.map((d) => (
+                              <option key={d.id} value={d.id}>
+                                {documentRole(d.type)} · {d.name}
+                              </option>
+                            ))}
+                          </optgroup>
+                        )}
+                      </select>
+                      {lineDocs.length > 0 && doc && !relatedDocIds.has(doc.id) && (
+                        <small className="source-context" role="status">
+                          Viewing another source page. Selected sample: {line?.id}.
+                        </small>
+                      )}
+                    </label>
                   )}
                   <DocumentPreview
                     doc={doc}
@@ -977,7 +1006,7 @@ function App() {
                           title={
                             settings?.metaConfigured
                               ? "Mono PCM WAV, 16/24 kHz, up to 10 minutes"
-                              : "Meta credits required. Typed notes work now."
+                              : "Meta API key required. Typed notes work now."
                           }
                         >
                           <AudioLines size={15} />
@@ -1123,6 +1152,7 @@ function App() {
                         {ev.model || "Deterministic code"}
                         {ev.ledgerId ? " · " + ev.ledgerId : ""}
                       </span>
+                      {ev.providerCall && <ProviderCallDetails call={ev.providerCall} />}
                       <code>SHA256 {ev.hash}</code>
                       <code>Previous {ev.previousHash}</code>
                     </div>
@@ -1283,18 +1313,20 @@ function App() {
             ))}
           </div>
           <div className="setup-box">
-            <strong>When your credits arrive</strong>
+            <strong>Connect your model providers</strong>
             <ol>
               <li>
-                Copy <code>.env.example</code> to <code>.env</code> in the
-                project.
+                Keep your existing <code>.env</code>. If missing, create it
+                from <code>.env.example</code>.
               </li>
               <li>
                 Set <code>MODEL_API_KEY</code> and <code>BASETEN_API_KEY</code>.
+                On Windows, <code>./configure.ps1</code> uses hidden prompts.
               </li>
               <li>Restart the server, then select Live API below.</li>
-              <li>Validate a small synthetic sample before a full run.</li>
+              <li>Run <code>npm run live:preflight</code> before a full sample.</li>
             </ol>
+            <p>Configured means a key is present. Successful requests still need validation.</p>
           </div>
           {e && (
             <div className="mode-control">
@@ -1559,6 +1591,36 @@ function DocumentPreview({
     </div>
   );
 }
+function ProviderCallDetails({ call }: { call: ProviderCall }) {
+  const rows: [string, string | number][] = [
+    ["Provider", call.provider === "meta" ? "Meta" : "Baseten"],
+    ["Operation", nice(call.operation)],
+    ["Call outcome", nice(call.outcome)],
+    ["Requested model", call.requestedModel],
+    ["Returned model", call.returnedModel || "Not reported by provider"],
+    ["Response ID", call.responseId || "Not reported by provider"],
+    ["Request ID", call.requestId || "Not reported by provider"],
+    ["Started", call.startedAt],
+    ["Duration", `${Math.round(call.durationMs).toLocaleString("en-ZA")} ms`],
+    ["HTTP status", call.httpStatus ?? "Not reported by provider"],
+    ["Input tokens", call.usage?.inputTokens ?? "Not reported by provider"],
+    ["Output tokens", call.usage?.outputTokens ?? "Not reported by provider"],
+    ["Total tokens", call.usage?.totalTokens ?? "Not reported by provider"],
+  ];
+  return (
+    <section className="provider-request" aria-label="Provider request metadata">
+      <strong>Provider request metadata</strong>
+      <dl>
+        {rows.map(([label, value]) => (
+          <React.Fragment key={label}>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </React.Fragment>
+        ))}
+      </dl>
+    </section>
+  );
+}
 function ClaimCard({
   claim: c,
   e,
@@ -1608,8 +1670,9 @@ function ClaimCard({
               key={crop.id}
               onClick={() => onCrop(crop.id)}
               title={`View ${crop.field} crop`}
+              aria-label={`Inspect ${nice(crop.field)} crop from ${e.documents.find((d) => d.id === crop.docId)?.name || "source document"}`}
             >
-              <img src={fileUrl(crop.path)} alt={`${crop.field} source crop`} />
+              <img loading="lazy" src={fileUrl(crop.path)} alt={`${crop.field} source crop`} />
               <span>
                 <Link2 size={10} />
                 {nice(crop.field)}
@@ -1633,7 +1696,7 @@ function ClaimCard({
       </div>
       <details className="verification-detail">
         <summary>
-          Verification details
+          {crops.length ? `Inspect all ${crops.length} crops` : "Verification details"}
           <ChevronDown size={12} />
         </summary>
         <p>
@@ -1643,20 +1706,34 @@ function ClaimCard({
         <small>
           Attempt {c.attempts} · {c.cropIds.length} evidence crops
         </small>
-        <div className="reread-values">
-          {crops.map((crop) => (
-            <div key={crop.id}>
-              <span>{nice(crop.field)}</span>
-              <strong>
-                {crop.verification
-                  ? String(crop.verification.value ?? "Unreadable")
-                  : "No retained read"}
-              </strong>
-              <small>
-                {crop.verification?.agrees ? "Agrees" : "Uncorroborated"}
-              </small>
-            </div>
-          ))}
+        <div className="reread-values" aria-label={`${nice(c.test)} supporting evidence`}>
+          {crops.map((crop) => {
+            const source = e.documents.find((d) => d.id === crop.docId);
+            return (
+              <button
+                type="button"
+                key={crop.id}
+                className="crop-inspect-row"
+                aria-label={`Inspect ${nice(crop.field)} crop from ${source?.name || "source document"}`}
+                title={source?.name}
+                onClick={() => onCrop(crop.id)}
+              >
+                <span>
+                  <span>{nice(crop.field)}</span>
+                  <small>{source ? documentRole(source.type) : "Source document"}</small>
+                </span>
+                <strong>
+                  {crop.verification
+                    ? String(crop.verification.value ?? "Unreadable")
+                    : "No retained read"}
+                </strong>
+                <small>
+                  {crop.verification?.agrees ? "Agrees" : "Uncorroborated"}
+                </small>
+                <ArrowUpRight size={12} aria-hidden="true" />
+              </button>
+            );
+          })}
         </div>
       </details>
       {c.result !== "match" && (

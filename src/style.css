@@ -1434,6 +1434,33 @@ h1 > span {
   font-size: 8px;
   overflow-wrap: anywhere;
 }
+.provider-request {
+  min-width: 0;
+  color: #5e7451;
+  border: 1px solid #dfe8d4;
+  background: #fff;
+  border-radius: 5px;
+  padding: 11px;
+}
+.provider-request > strong {
+  font-size: 10px;
+  font-weight: 600;
+}
+.provider-request dl {
+  display: grid;
+  grid-template-columns: minmax(80px, 105px) minmax(0, 1fr);
+  gap: 6px 12px;
+  margin: 10px 0 0;
+}
+.provider-request dt {
+  color: #7b8b6f;
+}
+.provider-request dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
 .integrity-body {
   padding: 45px;
   max-width: 760px;
@@ -2464,26 +2491,68 @@ h1 > span {
   border-top: 1px solid #e4eadb;
   margin-top: 9px;
   padding-top: 7px;
+  max-height: 264px;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
-.reread-values > div {
-  display: flex;
+.reread-values > .crop-inspect-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) auto 12px;
+  align-items: center;
   gap: 7px;
-  justify-content: space-between;
-  padding: 4px 0;
+  padding: 8px 5px;
   font-size: 9px;
+  width: 100%;
+  min-height: 40px;
+  text-align: left;
+  border-radius: 4px;
+  border-bottom: 1px solid #eef1e7;
+}
+.crop-inspect-row:hover {
+  background: #f0f4e8;
+}
+.crop-inspect-row > span {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: anywhere;
+}
+.crop-inspect-row > span > small {
+  margin-top: 2px;
+  color: #7e8c72;
 }
 .reread-values strong {
-  max-width: 60%;
+  min-width: 0;
   overflow-wrap: anywhere;
   font-weight: 500;
 }
 .reread-values small {
   font-size: 8px;
 }
+.source-picker {
+  display: block;
+  padding: 0 16px 12px;
+  min-width: 0;
+}
+.source-picker > span {
+  display: block;
+  color: #718068;
+  font-size: 9px;
+  margin-bottom: 6px;
+}
+.source-context {
+  display: block;
+  margin-top: 6px;
+  font-size: 9px;
+  line-height: 1.5;
+  color: #92713c;
+}
 .source-select {
   display: block;
-  margin: 0 16px 12px;
-  width: calc(100% - 32px);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 34px;
   background: #fff;
   border: 1px solid #dfe8d4;
   border-radius: 4px;
