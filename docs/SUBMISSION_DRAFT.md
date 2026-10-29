@@ -12,7 +12,7 @@ This is a proposed team name, not a claim that it has been saved in the portal.
 
 ## Team Members
 
-The form showed the user's **J de Beer** account. Confirm the exact registered member selection and representative authorization. Add only actual participating people; no additional team members have been invented or selected by the coding agent.
+The form showed **Johan de Beer** (`JohandeBeer`). Confirm the registered member selection and representative authorization. Add only actual participating people; no additional team members have been invented or selected by the coding agent.
 
 ## Track
 

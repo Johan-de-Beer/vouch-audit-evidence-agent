@@ -117,6 +117,33 @@ test("decimal currency compares in integer cents with locale grouping and negati
   assert.equal(sameValue("115.00", 115, "money"), true);
   assert.equal(sameValue("115", 116, "money"), false);
 });
+
+test("three-way price proof checks quantity extensions and order totals, not just equal unit prices", () => {
+  const e = engagement();
+  populate(e);
+  const price = () =>
+    matchLedgerLine(e, e.ledger[0]).find((c) => c.test === "price")!;
+  assert.equal(price().pass, true);
+  const invoiceNet = e.fields.find(
+    (f) => f.docId === "doc-invoice" && f.name === "net",
+  )!;
+  invoiceNet.value = 120;
+  assert.equal(price().pass, false);
+  assert.ok(price().reasons.some((r) => r.includes("multiplied")));
+  invoiceNet.value = 100;
+  const orderGross = e.fields.find(
+    (f) => f.docId === "doc-po" && f.name === "total",
+  )!;
+  orderGross.value = 125;
+  assert.equal(price().pass, false);
+  assert.ok(price().reasons.some((r) => r.includes("gross totals")));
+  e.fields = e.fields.filter((f) => f !== orderGross);
+  assert.equal(
+    price().pass,
+    null,
+    "Missing order-total evidence must abstain.",
+  );
+});
 test("three-way matching catches transpositions, VAT errors, short deliveries and missing approvals", () => {
   const e = engagement();
   populate(e);

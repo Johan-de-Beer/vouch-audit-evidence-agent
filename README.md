@@ -2,6 +2,8 @@
 
 [Public source repository](https://github.com/Johan-de-Beer/vouch-audit-evidence-agent) · [Automated checks](https://github.com/Johan-de-Beer/vouch-audit-evidence-agent/actions) · [Validation record](docs/VALIDATION.md)
 
+![Offline synthetic evidence review](docs/screenshots/vouch-desktop.jpg)
+
 Vouch reviews a purchases ledger sample against invoices, purchase orders and goods received notes. It connects each supported finding to a crop of the source evidence, records the agent's work, and produces a working paper for an auditor to review.
 
 **The complete synthetic demonstration runs without API credits.** Its extracted values, crop coordinates and simulated rereads come from labelled fixtures. Live Meta and Baseten adapters are implemented separately and have **not yet been validated with credentials**. A model name or a “Configured” badge means configuration is present, not that inference succeeded.
@@ -29,6 +31,8 @@ npm start
 ```
 
 Open **http://127.0.0.1:3001**. On Windows, `./start.ps1` installs missing dependencies, creates `.env` only if absent, builds, and starts production. `./start.ps1 -Development` starts the development servers instead. Stop with Ctrl+C.
+
+For a hidden background application, use `./start.ps1 -Background`. Stop that managed process with `./stop.ps1`. After adding keys to `.env`, stop and start the application so the server reloads them. Both scripts verify the recorded process belongs to this checkout before managing it.
 
 ## Try the demonstration
 
@@ -86,6 +90,8 @@ Use **Import sample** or the downloadable ledger template. CSV columns `date`, `
 
 Document roles are inferred from names: `PO`/`purchase order`, `GRN`/`delivery`/`received`, and `bank`/`statement`; otherwise a source is treated as an invoice. References must associate documents unambiguously. Imported samples require live credentials to analyse; offline fixtures apply only to the built-in synthetic demo. Use synthetic material for this hackathon. Source images and crops are sent to configured providers only when live tools are invoked.
 
+The current price test uses one aggregate quantity/unit price per document, verifies quantity extensions against net totals, and compares invoice/PO net and gross totals. Multiple line items, discounts, freight, partial invoices and mixed tax rates need an expanded schema or explicit auditor reconciliation; the prototype does not infer adjustments to make a document match. The synthetic pack uses a fixed 15% VAT policy.
+
 Voice notes accept **mono 16-bit PCM WAV at 16 or 24 kHz**, up to ten minutes and within the upload limit. Typed notes work offline. The application is a sample-vouching prototype: stock counts, bank matching, completeness testing, real-time voice, multi-tenant permissions and an audit-opinion engine are outside this build.
 
 ## Architecture and checks
@@ -116,7 +122,7 @@ docker run --rm -p 127.0.0.1:3001:3001 --env APP_TOKEN --mount source=vouch-data
 
 Keep the token in your session and enter it in Vouch's unlock screen. The container defaults to `HOST=0.0.0.0`, `PORT=3001`, `DATA_DIR=/app/data`; it refuses to start without the token. Add provider keys as runtime secrets when ready. `.dockerignore` excludes `.env`, local evidence, generated artifacts and `node_modules` from the image context. The image runs as the `node` user; bind-mounted directories must be writable by that user.
 
-Container verification remains pending: the Docker CLI was present during this build, but its Linux engine was not running, so no image build or container smoke test was completed.
+The production image was built and exercised successfully in [GitHub Actions](https://github.com/Johan-de-Beer/vouch-audit-evidence-agent/actions/runs/40817108718). The test verified token authentication, session cookies, protected evidence files and a complete synthetic run with valid file hashes and result seal. Local Docker Desktop was not running; container validation ran on a fresh Linux CI host.
 
 For a service such as Render or Fly, deploy this Dockerfile as **one persistent container**, expose port 3001 behind HTTPS, set `HOST=0.0.0.0` and `DATA_DIR=/app/data`, mount persistent storage there, and provide `APP_TOKEN` and provider keys using the host's secrets interface. Use `/api/health` for the health probe. Keep one replica: SQLite and source files are local. Do not use an ephemeral filesystem or static-only hosting for this API. This repository includes deployment preparation; **no hosted deployment has been performed**.
 
@@ -131,4 +137,4 @@ Back up the entire `DATA_DIR` while stopped, or use a SQLite-aware backup plus c
 
 The authenticated [participant guide](https://cerebralvalley.ai/e/meta-ai-developer-hackathon/details) and submission form were inspected on 29 October without writes. The verified build window is **27 October–4 November 2026**. A **public GitHub repository** and **three-minute video** are required; the video must clearly show only functionality built during the hackathon. Basic RAG/simple-image-analyzer entries are excluded. Actual Meta API or Meta open-weight use is a **Stage 1 pass/fail requirement**, so the offline demo alone is not submission-ready.
 
-The deadline is **5 November 2026, 04:00 SAST**. Live validation, the public repository, recorded/uploaded video, final personal declarations and submission remain pending. The guide's individual credit-claim form is processed in batches; applying credits requires a card with possible temporary preauthorization, and a spend-limit notification is not a guaranteed hard cap. No submission, public posting, legal acceptance, billing change or credit claim is represented as completed.
+The deadline is **5 November 2026, 04:00 SAST**. The public source repository is published. Live validation, public application hosting, the recorded/uploaded video, final personal declarations and submission remain pending. The guide's individual credit-claim form is processed in batches; applying credits requires a card with possible temporary preauthorization, and a spend-limit notification is not a guaranteed hard cap. No submission, social post, legal acceptance, billing change or credit claim is represented as completed.

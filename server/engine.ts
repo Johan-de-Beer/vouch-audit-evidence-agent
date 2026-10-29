@@ -294,9 +294,28 @@ export function matchLedgerLine(
   });
   const ip = moneyField(inv("unit_price")),
     pp = moneyField(pof("unit_price")),
-    poCurrency = pof("currency");
+    poCurrency = pof("currency"),
+    poNet = moneyField(pof("net")),
+    poTotal = moneyField(pof("total"));
+  const invoiceExtension =
+    ip !== null && iq !== null ? Math.round(ip * iq) : null;
+  const orderExtension =
+    pp !== null && pq !== null ? Math.round(pp * pq) : null;
   const priceKnown =
-    ip !== null && pp !== null && Boolean(currency) && Boolean(poCurrency);
+    ip !== null &&
+    pp !== null &&
+    Boolean(currency) &&
+    Boolean(poCurrency) &&
+    net !== null &&
+    total !== null &&
+    poNet !== null &&
+    poTotal !== null &&
+    iq !== null &&
+    pq !== null &&
+    iq >= 0 &&
+    pq >= 0 &&
+    Number.isSafeInteger(invoiceExtension) &&
+    Number.isSafeInteger(orderExtension);
   const sameCurrency = Boolean(
     currency &&
     poCurrency &&
@@ -306,7 +325,7 @@ export function matchLedgerLine(
   const priceReasons: string[] = [];
   if (!priceKnown)
     priceReasons.push(
-      "Price testing needs readable invoice and purchase order unit prices with source currency evidence from both documents.",
+      "Price testing needs invoice and purchase order unit prices, quantities, net and gross totals, with currency evidence from both documents.",
     );
   else {
     if (!sameCurrency)
@@ -317,6 +336,18 @@ export function matchLedgerLine(
       priceReasons.push(
         `Invoice unit price ${ip / 100} differs from PO price ${pp / 100}.`,
       );
+    if (Math.abs(invoiceExtension! - net!) > 1)
+      priceReasons.push(
+        "Invoice quantity multiplied by unit price does not equal its net total.",
+      );
+    if (Math.abs(orderExtension! - poNet!) > 1)
+      priceReasons.push(
+        "Purchase order quantity multiplied by unit price does not equal its net total.",
+      );
+    if (Math.abs(net! - poNet!) > 1)
+      priceReasons.push("Invoice and purchase order net totals differ.");
+    if (Math.abs(total! - poTotal!) > 1)
+      priceReasons.push("Invoice and purchase order gross totals differ.");
   }
   candidates.push({
     test: "price",
@@ -327,12 +358,18 @@ export function matchLedgerLine(
       pof("unit_price"),
       currency,
       poCurrency,
+      inv("quantity"),
+      pof("quantity"),
+      inv("net"),
+      pof("net"),
+      inv("total"),
+      pof("total"),
     ),
-    pass: priceKnown ? sameCurrency && Math.abs(ip - pp) <= 1 : null,
+    pass: priceKnown ? priceReasons.length === 0 : null,
     reasons: priceReasons.length
       ? priceReasons
       : [
-          "Invoice and purchase order unit prices agree in the ledger currency.",
+          "Invoice and purchase order prices, extended net values and gross totals agree in the ledger currency.",
         ],
   });
   const duplicates = engagement.ledger.filter(
