@@ -1,13 +1,18 @@
 {
-  "pdfSha256": "23a0335f9a77d92e5c546f6c8d3987fcdc0c5d62a303568ab8a0ec61a828669b",
-  "pages": 200,
+  "pdfSha256": "6c501e2b7b5952aab9431a17a714c75c80b6757075de809f991b666b439d1e60",
+  "pages": 225,
   "headersOnAllPages": true,
   "footersOnAllPages": true,
-  "amountExceptionPage": 17,
+  "amountExceptionPage": 19,
   "visuallyInspectedPages": [
     1,
     2,
-    17
+    19
   ],
-  "visualResult": "Readable headers, continuation context, evidence crops, hashes and footers; no clipping or overlap on inspected pages."
+  "visualResult": "Readable headers, continuation context, evidence crops, hashes and footers; no clipping or overlap on inspected pages.",
+  "screenshots": [
+    "working-paper-page-1.png",
+    "working-paper-page-2.png",
+    "working-paper-page-19.png"
+  ]
 }

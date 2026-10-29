@@ -1,9 +1,9 @@
 {
   "base": "http://127.0.0.1:3001",
   "passed": true,
-  "timestamp": "2026-10-29T04:07:57.225Z",
-  "demoEngagementId": "982ae84a-210a-460a-956d-1db281303aa3",
-  "importEngagementId": "f8b144a4-7d05-42df-a3d4-0f5a956b3460",
+  "timestamp": "2026-10-29T04:33:56.242Z",
+  "demoEngagementId": "128b10a5-1683-42ea-afb6-747b0f4a8f0a",
+  "importEngagementId": "a1aa1656-ae1c-4fb7-a77c-43d7522dbf6c",
   "checks": [
     {
       "name": "Health",
@@ -20,17 +20,17 @@
     {
       "name": "Synthetic sample creation",
       "passed": true,
-      "detail": "982ae84a-210a-460a-956d-1db281303aa3"
+      "detail": "128b10a5-1683-42ea-afb6-747b0f4a8f0a"
     },
     {
       "name": "End-to-end synthetic run",
       "passed": true,
-      "detail": "225 claims, 6 exception claims, 0 unverified"
+      "detail": "225 claims, 7 exception claims across 6 rows, 0 unverified"
     },
     {
       "name": "Every compared crop retains its own explicitly simulated verification",
       "passed": true,
-      "detail": "475 source crops independently addressable"
+      "detail": "525 source crops independently addressable"
     },
     {
       "name": "Notes and explicit review records persist",
@@ -48,7 +48,7 @@
     {
       "name": "PDF exports all sample working papers",
       "passed": true,
-      "detail": "200 pages"
+      "detail": "225 pages"
     },
     {
       "name": "ZIP contains original documents, rendered pages, crops, working papers and a verified file manifest",
@@ -58,7 +58,7 @@
     {
       "name": "Actual PDF multipart import renders a verified PNG page",
       "passed": true,
-      "detail": "f8b144a4-7d05-42df-a3d4-0f5a956b3460"
+      "detail": "a1aa1656-ae1c-4fb7-a77c-43d7522dbf6c"
     },
     {
       "name": "Live execution without credentials fails explicitly",

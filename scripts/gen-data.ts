@@ -338,7 +338,7 @@ export async function generateDemo(
   }
   const exceptions = new Map<string, TestName[]>([
     ["L003", ["amount"]],
-    ["L007", ["vat"]],
+    ["L007", ["vat", "price"]],
     ["L012", ["quantity"]],
     ["L017", ["approval"]],
     ["L021", ["duplicate"]],

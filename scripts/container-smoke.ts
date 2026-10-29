@@ -67,7 +67,7 @@ assert.equal(
   result.error || "Container run did not complete",
 );
 assert.equal(result.claims.length, 225);
-assert.equal(result.claims.filter((c) => c.result === "exception").length, 6);
+assert.equal(result.claims.filter((c) => c.result === "exception").length, 7);
 assert.equal(result.claims.filter((c) => c.result === "unverified").length, 0);
 const integrity = await (
   await fetch(`${base}/api/engagements/${e.id}/integrity`, { headers })
@@ -89,7 +89,7 @@ console.log(
       passed: true,
       authenticated: true,
       claims: 225,
-      exceptions: 6,
+      exceptions: 7,
       filesChecked: integrity.filesChecked,
     },
     null,

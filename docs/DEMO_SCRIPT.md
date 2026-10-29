@@ -26,7 +26,7 @@ Only replace the offline narration once a recorded Meta+SAM+Baseten run succeeds
 
 ## Details to keep accurate
 
-- Five scenarios are amount transposition, VAT error, short delivery, missing approval, and a duplicate supplier invoice. The duplicate affects two rows, yielding six exception rows/claims in the fixture.
+- Five scenarios are amount transposition, VAT error, short delivery, missing approval, and a duplicate supplier invoice. The duplicate affects two rows. The VAT scenario fails both VAT and invoice/PO total checks, yielding seven exception findings across six rows.
 - A confidence threshold of 0.8 is configured. It is not a calibrated probability of correctness.
 - Voice upload is unavailable without the Meta key. It accepts supported WAV files; there is no real-time microphone conversation.
 - This build was implemented using Codex on 29 October 2026. Do not claim Muse Code was used.

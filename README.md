@@ -55,7 +55,7 @@ The fixture has **25 ledger rows, 75 source documents and nine controls per row:
 | L017 | Invoice authorisation signature absent |
 | L021 and L022 | The same supplier invoice posted twice |
 
-The latest retained [evaluation](docs/validation/evaluation.json) passed 225/225 fixture assertions and found all five scenarios/six exception claims, with no false positives in this fixture. **These are deterministic pipeline checks, not model accuracy, benchmark generalisation, or a measured productivity improvement.** Regenerate with `npm run eval`. See [dataset details](docs/DATASET.md).
+The latest retained [evaluation](docs/validation/evaluation.json) passed 225/225 fixture assertions and found all five scenarios across six rows, producing seven exception findings. The VAT scenario also fails the invoice/PO gross-total comparison. There were no false positives in this fixture. **These are deterministic pipeline checks, not model accuracy, benchmark generalisation, or a measured productivity improvement.** Regenerate with `npm run eval`. See [dataset details](docs/DATASET.md).
 
 ## Enable live models when credits arrive
 

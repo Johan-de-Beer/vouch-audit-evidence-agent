@@ -126,6 +126,14 @@ try {
   assert.equal(engagement.claims.length, 225);
   assert.equal(
     engagement.claims.filter((c) => c.result === "exception").length,
+    7,
+  );
+  assert.equal(
+    new Set(
+      engagement.claims
+        .filter((c) => c.result === "exception")
+        .map((c) => c.ledgerId),
+    ).size,
     6,
   );
   assert.equal(
@@ -135,7 +143,7 @@ try {
   checks.push({
     name: "End-to-end synthetic run",
     passed: true,
-    detail: "225 claims, 6 exception claims, 0 unverified",
+    detail: "225 claims, 7 exception claims across 6 rows, 0 unverified",
   });
   const usedCrops = new Set(
     engagement.claims.flatMap((claim) => claim.cropIds),

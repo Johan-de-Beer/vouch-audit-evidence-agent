@@ -1,8 +1,8 @@
 {
   "label": "Synthetic fixture pipeline evaluation (NOT live Meta model accuracy)",
-  "timestamp": "2026-10-29T04:14:51.817Z",
+  "timestamp": "2026-10-29T04:33:33.306Z",
   "mode": "demo",
-  "elapsedMs": 6347,
+  "elapsedMs": 4962,
   "ledgerLines": 25,
   "documents": 75,
   "claims": 225,
@@ -10,8 +10,8 @@
   "correctTests": 225,
   "plantedScenarios": 5,
   "detectedScenarios": 5,
-  "expectedExceptions": 6,
-  "detectedExceptions": 6,
+  "expectedExceptions": 7,
+  "detectedExceptions": 7,
   "falsePositives": 0,
   "noEvidenceMatches": 0,
   "damagedCrops": [],
@@ -459,8 +459,8 @@
     {
       "ledgerId": "L007",
       "test": "price",
-      "result": "match",
-      "observed": "match",
+      "result": "exception",
+      "observed": "exception",
       "correct": true
     },
     {
