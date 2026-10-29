@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "id": "13c52c2e-b0c0-4069-ac35-e040d23729b1",
+  "id": "6a32d87d-9f37-48b4-b9e5-16f17d9c797e",
   "label": "Bounded live-provider preflight on one generated fictional invoice; not a full-engagement evaluation",
-  "startedAt": "2026-10-29T15:46:31.647Z",
-  "completedAt": "2026-10-29T15:46:31.648Z",
-  "elapsedMs": 1,
-  "status": "blocked",
+  "startedAt": "2026-10-29T17:43:23.830Z",
+  "completedAt": "2026-10-29T17:43:36.963Z",
+  "elapsedMs": 13133,
+  "status": "passed",
   "coverage": "meta_only",
-  "metaPassed": false,
+  "metaPassed": true,
   "basetenPassed": null,
   "readyForBoundedFullRun": false,
   "fullEngagementValidated": false,
   "configuration": {
-    "metaConfigured": false,
+    "metaConfigured": true,
     "basetenConfigured": false,
     "models": {
       "spark": "muse-spark-1.3",
@@ -24,22 +24,96 @@
   "limits": {
     "documents": 1,
     "fieldsSegmented": 1,
-    "maximumAdapterCalls": 0,
-    "maximumTransportAttempts": 0,
-    "timeoutMs": 120000
+    "maximumAdapterCalls": 2,
+    "maximumTransportAttempts": 4,
+    "timeoutMs": 90000
   },
-  "adapterCallsMade": 0,
-  "calls": [],
+  "adapterCallsMade": 2,
+  "calls": [
+    {
+      "provider": "meta",
+      "operation": "extract",
+      "requestedModel": "muse-spark-1.3",
+      "returnedModel": "muse-spark-1.3",
+      "responseId": "chatcmpl-01a188c2-912a-71c9-b143-1f5ecc1a79f3",
+      "requestId": "d04e0dfb-6da4-4eb8-ad58-8e3482fa482c",
+      "usage": {
+        "inputTokens": 2067,
+        "outputTokens": 1949,
+        "totalTokens": 4016
+      },
+      "startedAt": "2026-10-29T17:43:23.904Z",
+      "durationMs": 11255,
+      "outcome": "success"
+    },
+    {
+      "provider": "meta",
+      "operation": "segment",
+      "requestedModel": "sam-3.1",
+      "requestId": "4edd3036-0bde-4550-bfdc-268dd637a488",
+      "returnedModel": "sam-3.1",
+      "responseId": "resp_6ae385c8e68cded290df48be",
+      "usage": {
+        "inputTokens": 0,
+        "outputTokens": 0,
+        "totalTokens": 0
+      },
+      "startedAt": "2026-10-29T17:43:35.159Z",
+      "durationMs": 1793,
+      "outcome": "success"
+    }
+  ],
   "steps": [
     {
       "stage": "credentials",
-      "status": "blocked",
+      "status": "passed",
       "elapsedMs": 0,
-      "errorCode": "missing_meta_key",
-      "message": "MODEL_API_KEY is not configured. No provider requests were attempted."
+      "message": "Meta credential is present; request success will establish whether it is valid."
+    },
+    {
+      "stage": "source",
+      "status": "passed",
+      "elapsedMs": 72,
+      "metrics": {
+        "synthetic": true,
+        "width": 1000,
+        "height": 1320,
+        "sha256": "111822b495ec293973242e4c47bf3592b69fb76bbd26ac9cde74cba34a0bbe97"
+      }
+    },
+    {
+      "stage": "spark",
+      "status": "passed",
+      "elapsedMs": 11255,
+      "metrics": {
+        "fieldsReturned": 11,
+        "totalFieldFound": true,
+        "totalAgreesWithPrintedSource": true,
+        "confidence": 0.99
+      }
+    },
+    {
+      "stage": "sam",
+      "status": "passed",
+      "elapsedMs": 1804,
+      "metrics": {
+        "masksReturned": 1,
+        "confidence": 0.92578125,
+        "cropSha256": "6558e67d8c0c03a5ccdd8ba74fbca72bfcd67be577c14beb74089cb9bbfe350d",
+        "maskSha256": "0b2a95b96922ce74b60832f2f7cc2e05e53f6959d602bd430a80984b0e3f3df9"
+      }
+    },
+    {
+      "stage": "baseten",
+      "status": "skipped",
+      "elapsedMs": 0,
+      "message": "Skipped by --meta-only. Independent live verification has not been validated."
     }
   ],
   "artifacts": {
-    "runDirectory": null
+    "runDirectory": "artifacts/live-preflight/runs/6a32d87d-9f37-48b4-b9e5-16f17d9c797e",
+    "sourceImageSha256": "111822b495ec293973242e4c47bf3592b69fb76bbd26ac9cde74cba34a0bbe97",
+    "cropSha256": "6558e67d8c0c03a5ccdd8ba74fbca72bfcd67be577c14beb74089cb9bbfe350d",
+    "maskSha256": "0b2a95b96922ce74b60832f2f7cc2e05e53f6959d602bd430a80984b0e3f3df9"
   }
 }

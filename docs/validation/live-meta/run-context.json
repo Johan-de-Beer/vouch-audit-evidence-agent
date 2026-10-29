@@ -1,0 +1,12 @@
+{
+  "label": "Post-run provenance and visual review for the limited real Meta preflight",
+  "recordedAt": "2026-10-29T17:49:20.041Z",
+  "sourceRevision": "c8ebfb4f04a74dcb95956b53eafd0f4fc13809cb",
+  "runtimeSourcesMatchRevision": true,
+  "officialMetaEndpointVerified": true,
+  "reportSha256": "83dc5a89a18e1d296304f53aae2905a72d1e8ca8af83cf5a08cfc214045c9bdf",
+  "cropVisuallyReviewed": true,
+  "visibleTotal": "TOTAL ZAR 1,150.00",
+  "fullEngagementValidated": false,
+  "actualCostKnown": false
+}

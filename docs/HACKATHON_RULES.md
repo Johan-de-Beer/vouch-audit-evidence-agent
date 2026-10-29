@@ -43,7 +43,7 @@ The [authenticated guide](https://cerebralvalley.ai/e/meta-ai-developer-hackatho
 
 The guide excludes basic RAG applications and simple image analyzers among its prohibited basic project categories. Vouch's intended contribution is the coordinated evidence workflow, independent reread, corroboration gates, review records and portable evidence export. Judges determine whether the submitted implementation satisfies the category rules.
 
-**Stage 1 is pass/fail and requires actual use of Meta API or Meta open-weight models.** A fixture-only recording, installed adapter, configured model name or mocked provider test does not satisfy that requirement. The current build remains incomplete for this gate until a successful real model run is recorded.
+**Stage 1 is pass/fail and requires actual use of Meta API or Meta open-weight models.** A fixture-only recording, installed adapter, configured model name or mocked provider test does not establish actual use. A [bounded real Meta preflight](validation/live-preflight.json) now records successful Muse Spark extraction and SAM segmentation on one fictional invoice. This is evidence of actual execution within that limited scope; no organizer Stage 1 decision or full submission readiness is claimed.
 
 For this event, the guide specifies Baseten model **`meta-models/muse-spark-open-1026`**. Use that event-specific identifier even though the general public cookbook shows a different slug.
 
@@ -61,18 +61,19 @@ The [Chat Completions documentation](https://dev.meta.ai/docs/protocols/chat-com
 
 ## Outstanding verification
 
-- **Meta account setup:** the user reports credits received. The API-key page inspected on 29 October still showed no payment method, no keys and disabled key creation. Billing/key setup and Baseten credentials remain pending. Offline demonstrations must identify themselves as offline/rules-based. A configured adapter or mocked test is not proof that Meta inference ran. Preserve real request/model/usage metadata after the first successful live run.
+- **Meta access and billing:** a Meta key completed the bounded extraction/SAM preflight on 29 October at 19:43 SAST. Earlier key-creation/billing-page blocks are historical. Current balance and actual charges are unknown; zero SAM token counts do not imply free inference. Baseten credentials remain absent. Further provider calls are deferred to conserve credits.
 - **Personal eligibility and declarations:** the authenticated participant area was accessible, but the user's age, eligibility declarations, final track/team roster, representative authorization and signed-waiver status still need personal confirmation.
 - **Public repository and video:** requirements are verified. [The repository is public](https://github.com/Johan-de-Beer/vouch-audit-evidence-agent), with a successful fresh Ubuntu CI run. The recorded/uploaded three-minute video and hosted deployment remain pending.
 - **Credit Terms PDF:** the waiver links to a signed Facebook CDN PDF. Automated retrieval returned HTTP 403, and the web reader could not open it. Read it in the participant's browser before claiming credits. Do not treat the published credit amount as confirmation that a balance is available.
-- **Provider execution:** Meta/SAM/Baseten/voice access and live quality remain unverified until credentials are available. This blocks the actual-model-use gate.
+- **Remaining live coverage:** Baseten independent reread, planning, voice, full-engagement behavior, unreadable sources and planted cases have not been exercised live. The preflight's 11 extracted fields and one visually checked total crop are not a model-quality benchmark or complete validation.
 
 ## Final release checklist
 
 - [ ] Participant confirms the outstanding account/eligibility items above.
 - [x] Read authenticated participant instructions and inspect the submission form without submitting.
 - [ ] Read linked credit terms and complete any credit/billing steps personally.
-- [ ] Demonstrate a successful Meta-backed run once credits arrive; label offline runs accurately.
+- [x] Retain bounded real Meta extraction/SAM execution evidence, including returned models, request references and three verified source/crop/mask files. This does not establish full-engagement validation or organizer approval.
+- [ ] Complete the remaining live validation in a later deliberate credit-budget session, including the independent Baseten reread.
 - [x] Demonstrate source-linked findings, contradictory/missing-evidence handling, reviewer decisions, and export using synthetic material; retained offline validation is in [VALIDATION.md](VALIDATION.md). Repeat with live output before recording claims about models.
 - [x] Publish the source in a public GitHub repository; public visibility and a fresh CI run were verified.
 - [ ] Record and upload the required three-minute demo, showing only hackathon-built contributions and truthful measured results.
@@ -80,4 +81,4 @@ The [Chat Completions documentation](https://dev.meta.ai/docs/protocols/chat-com
 - [ ] Verify the exact submitted build starts from the documented setup and is accessible to judges.
 - [ ] Complete the actual portal fields, personally review the legal permission checkbox, and submit before the SAST deadline.
 
-The application can be built and tested while these participant-dependent items remain open. It must not be described as fully submitted, fully eligible, or verified with live Meta inference until those facts are established.
+The application can be built and tested while these participant-dependent items remain open. Describe the observed live Meta preflight precisely; do not describe the entry as fully submitted, organizer-approved, or validated across the full live workflow.
