@@ -16,3 +16,17 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+      - name: Build production container
+        run: docker build --tag vouch:ci .
+      - name: Start production container
+        run: docker run --detach --name vouch-smoke --publish 127.0.0.1:3001:3001 --env APP_TOKEN=vouch-ci-ephemeral-test-token vouch:ci
+      - name: Verify container authentication and complete demo
+        run: npx tsx scripts/container-smoke.ts
+        env:
+          APP_TOKEN: vouch-ci-ephemeral-test-token
+      - name: Container diagnostics
+        if: failure()
+        run: docker logs vouch-smoke
+      - name: Stop test container
+        if: always()
+        run: docker rm --force vouch-smoke || true

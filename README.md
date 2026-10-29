@@ -1,5 +1,7 @@
 # Vouch · Audit Evidence Agent
 
+[Public source repository](https://github.com/Johan-de-Beer/vouch-audit-evidence-agent) · [Automated checks](https://github.com/Johan-de-Beer/vouch-audit-evidence-agent/actions) · [Validation record](docs/VALIDATION.md)
+
 Vouch reviews a purchases ledger sample against invoices, purchase orders and goods received notes. It connects each supported finding to a crop of the source evidence, records the agent's work, and produces a working paper for an auditor to review.
 
 **The complete synthetic demonstration runs without API credits.** Its extracted values, crop coordinates and simulated rereads come from labelled fixtures. Live Meta and Baseten adapters are implemented separately and have **not yet been validated with credentials**. A model name or a “Configured” badge means configuration is present, not that inference succeeded.
@@ -49,7 +51,7 @@ The fixture has **25 ledger rows, 75 source documents and nine controls per row:
 | L017 | Invoice authorisation signature absent |
 | L021 and L022 | The same supplier invoice posted twice |
 
-The latest retained [evaluation](artifacts/evaluation.json) passed 225/225 fixture assertions and found all five scenarios/six exception claims, with no false positives in this fixture. **These are deterministic pipeline checks, not model accuracy, benchmark generalisation, or a measured productivity improvement.** Regenerate with `npm run eval`. See [dataset details](docs/DATASET.md).
+The latest retained [evaluation](docs/validation/evaluation.json) passed 225/225 fixture assertions and found all five scenarios/six exception claims, with no false positives in this fixture. **These are deterministic pipeline checks, not model accuracy, benchmark generalisation, or a measured productivity improvement.** Regenerate with `npm run eval`. See [dataset details](docs/DATASET.md).
 
 ## Enable live models when credits arrive
 

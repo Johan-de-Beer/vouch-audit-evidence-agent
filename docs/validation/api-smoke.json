@@ -1,0 +1,72 @@
+{
+  "base": "http://127.0.0.1:3001",
+  "passed": true,
+  "timestamp": "2026-10-29T04:07:57.225Z",
+  "demoEngagementId": "982ae84a-210a-460a-956d-1db281303aa3",
+  "importEngagementId": "f8b144a4-7d05-42df-a3d4-0f5a956b3460",
+  "checks": [
+    {
+      "name": "Health",
+      "passed": true
+    },
+    {
+      "name": "Host allowlist rejects DNS-rebinding host",
+      "passed": true
+    },
+    {
+      "name": "Cross-origin writes rejected",
+      "passed": true
+    },
+    {
+      "name": "Synthetic sample creation",
+      "passed": true,
+      "detail": "982ae84a-210a-460a-956d-1db281303aa3"
+    },
+    {
+      "name": "End-to-end synthetic run",
+      "passed": true,
+      "detail": "225 claims, 6 exception claims, 0 unverified"
+    },
+    {
+      "name": "Every compared crop retains its own explicitly simulated verification",
+      "passed": true,
+      "detail": "475 source crops independently addressable"
+    },
+    {
+      "name": "Notes and explicit review records persist",
+      "passed": true
+    },
+    {
+      "name": "Evidence files, event chain, result seal and notes/reviews validate",
+      "passed": true,
+      "detail": "975 checked files"
+    },
+    {
+      "name": "Standalone HTML exports embedded crops and escaped notes",
+      "passed": true
+    },
+    {
+      "name": "PDF exports all sample working papers",
+      "passed": true,
+      "detail": "200 pages"
+    },
+    {
+      "name": "ZIP contains original documents, rendered pages, crops, working papers and a verified file manifest",
+      "passed": true,
+      "detail": "981 files; 975 content hashes verified"
+    },
+    {
+      "name": "Actual PDF multipart import renders a verified PNG page",
+      "passed": true,
+      "detail": "f8b144a4-7d05-42df-a3d4-0f5a956b3460"
+    },
+    {
+      "name": "Live execution without credentials fails explicitly",
+      "passed": true
+    },
+    {
+      "name": "Malformed imports return actionable validation errors",
+      "passed": true
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 **Status: draft only; not submitted.** The actual authenticated [submission form](https://cerebralvalley.ai/e/meta-ai-developer-hackathon/hackathon/submit) and [participant guide](https://cerebralvalley.ai/e/meta-ai-developer-hackathon/details) were inspected in Chrome on **29 October 2026**, without edits or submission. Field headings below follow that form.
 
-**The entry is not yet ready for the Stage 1 actual-Meta-use gate.** Credentials/live validation, a public GitHub repository and a recorded/uploaded three-minute video remain pending. Do not replace those gaps with fixture scores, mock responses or invented links. Complete [LIVE_VALIDATION.md](LIVE_VALIDATION.md), then update the runtime-related answers from observed results.
+**The entry is not yet ready for the Stage 1 actual-Meta-use gate.** The public repository is published. Credentials/live validation and a recorded/uploaded three-minute video remain pending. Complete [LIVE_VALIDATION.md](LIVE_VALIDATION.md), then update the runtime-related answers from observed results.
 
 ## Team Name
 
@@ -42,7 +42,9 @@ Live Meta/SAM/Baseten/voice adapters are implemented, but credentials and succes
 
 ## Public GitHub Repository
 
-**PENDING — an actual public GitHub repository must be published and its URL supplied.** The guide requires public visibility. No repository URL, publication or judge access is claimed by this draft. Include source, lockfile, setup instructions and applicable third-party notices; exclude secrets and private evidence. Verify the published revision reproduces the demo.
+https://github.com/Johan-de-Beer/vouch-audit-evidence-agent
+
+Published publicly with source, lockfile, setup instructions, MIT license for original code and third-party notices. API keys and runtime evidence directories are excluded. A fresh Ubuntu GitHub Actions run reproduced tests, build and fixture evaluation successfully. Verify the final recording matches the submitted revision.
 
 ## 3 Minute Demo Video
 
@@ -90,7 +92,7 @@ Only add feedback on other partners if the participant actually used their produ
 
 ## Submit
 
-**NOT PRESSED.** Before submission: confirm personal eligibility/roster/track, complete actual-model validation, publish the public source repository, upload the required video, replace the pending fields with real URLs, and personally review all declarations and permissions.
+**NOT PRESSED.** Before submission: confirm personal eligibility/roster/track, complete actual-model validation, verify the public source revision, upload the required video, replace the pending fields with real URLs, and personally review all declarations and permissions.
 
 The verified deadline is **5 November 2026, 04:00 SAST**. Recheck organizer updates and submit earlier. See [HACKATHON_RULES.md](HACKATHON_RULES.md) for verified requirements and the remaining checklist.
 

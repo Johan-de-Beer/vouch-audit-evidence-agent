@@ -2480,6 +2480,16 @@ h1 > span {
 .reread-values small {
   font-size: 8px;
 }
+.source-select {
+  display: block;
+  margin: 0 16px 12px;
+  width: calc(100% - 32px);
+  background: #fff;
+  border: 1px solid #dfe8d4;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 10px;
+}
 .page-heading p,
 .panel-title p,
 .metric > p,

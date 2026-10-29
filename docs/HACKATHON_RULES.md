@@ -63,7 +63,7 @@ The [Chat Completions documentation](https://dev.meta.ai/docs/protocols/chat-com
 
 - **Meta credits/key:** pending, as stated by the user. Offline demonstrations must identify themselves as offline/rules-based. A configured adapter or mocked test is not proof that Meta inference ran. Preserve real request/model/usage metadata after the first successful live run.
 - **Personal eligibility and declarations:** the authenticated participant area was accessible, but the user's age, eligibility declarations, final track/team roster, representative authorization and signed-waiver status still need personal confirmation.
-- **Public repository and video:** requirements are verified. Neither a public repository URL nor a recorded/uploaded three-minute video has been produced by this build. A hosted application deployment is also pending; do not invent a URL or claim deployment is a verified mandatory form field.
+- **Public repository and video:** requirements are verified. [The repository is public](https://github.com/Johan-de-Beer/vouch-audit-evidence-agent), with a successful fresh Ubuntu CI run. The recorded/uploaded three-minute video and hosted deployment remain pending.
 - **Credit Terms PDF:** the waiver links to a signed Facebook CDN PDF. Automated retrieval returned HTTP 403, and the web reader could not open it. Read it in the participant's browser before claiming credits. Do not treat the published credit amount as confirmation that a balance is available.
 - **Provider execution:** Meta/SAM/Baseten/voice access and live quality remain unverified until credentials are available. This blocks the actual-model-use gate.
 
@@ -74,7 +74,7 @@ The [Chat Completions documentation](https://dev.meta.ai/docs/protocols/chat-com
 - [ ] Read linked credit terms and complete any credit/billing steps personally.
 - [ ] Demonstrate a successful Meta-backed run once credits arrive; label offline runs accurately.
 - [ ] Demonstrate source-linked findings, a contradictory/missing-evidence case, reviewer decisions, and export using synthetic material.
-- [ ] Publish the source in a public GitHub repository and verify judge access.
+- [x] Publish the source in a public GitHub repository; public visibility and a fresh CI run were verified.
 - [ ] Record and upload the required three-minute demo, showing only hackathon-built contributions and truthful measured results.
 - [ ] Record dependencies and applicable licenses; remove secrets and private client evidence from submission assets.
 - [ ] Verify the exact submitted build starts from the documented setup and is accessible to judges.

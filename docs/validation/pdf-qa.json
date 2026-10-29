@@ -1,0 +1,13 @@
+{
+  "pdfSha256": "23a0335f9a77d92e5c546f6c8d3987fcdc0c5d62a303568ab8a0ec61a828669b",
+  "pages": 200,
+  "headersOnAllPages": true,
+  "footersOnAllPages": true,
+  "amountExceptionPage": 17,
+  "visuallyInspectedPages": [
+    1,
+    2,
+    17
+  ],
+  "visualResult": "Readable headers, continuation context, evidence crops, hashes and footers; no clipping or overlap on inspected pages."
+}

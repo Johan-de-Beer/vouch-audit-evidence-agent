@@ -155,7 +155,16 @@ function App() {
     window.setTimeout(() => setToast(""), 5000);
   };
   const loadList = async () => setEngagements(await api("/engagements"));
+  const openConnections = () => {
+    setConnections(true);
+    void api<Settings>("/settings")
+      .then(setSettings)
+      .catch((err) => setError((err as Error).message));
+  };
   const choose = (value: Engagement) => {
+    try {
+      sessionStorage.setItem("vouch-engagement", value.id);
+    } catch {}
     setE(value);
     setNextMode(value.mode);
     setSelected(value.ledger[0]?.id || "");
@@ -175,9 +184,14 @@ function App() {
           { id: string; name: string; count: number; status: string }[]
         >("/engagements");
       setEngagements(list);
+      let savedId: string | null = null;
+      try {
+        savedId = sessionStorage.getItem("vouch-engagement");
+      } catch {}
+      const initial = list.find((item) => item.id === savedId) || list[0];
       choose(
-        list.length
-          ? await api("/engagements/" + list[0].id)
+        initial
+          ? await api("/engagements/" + initial.id)
           : await api("/demo", { method: "POST", body: "{}" }),
       );
       await loadList();
@@ -435,7 +449,7 @@ function App() {
             <strong>Evidence you can inspect.</strong>
             <p>Source crops. Deterministic checks. A trace for every claim.</p>
           </div>
-          <button className="nav-item" onClick={() => setConnections(true)}>
+          <button className="nav-item" onClick={openConnections}>
             <Settings2 size={17} />
             Models & connections
             <ArrowUpRight size={14} />
@@ -458,7 +472,7 @@ function App() {
             <ChevronRight size={14} />
             <strong>{e?.client || "Synthetic / Demonstration"}</strong>
           </div>
-          <button className="environment" onClick={() => setConnections(true)}>
+          <button className="environment" onClick={openConnections}>
             <span className={e?.mode === "live" ? "online-dot" : "amber-dot"} />
             {e?.mode === "live" ? "Live API mode" : "Offline fixture mode"}
             <Info size={13} />
@@ -529,7 +543,7 @@ function App() {
                   : "Provider calls use server-side credentials. Every unsupported finding stays unverified."}
               </span>
             </div>
-            <button onClick={() => setConnections(true)}>
+            <button onClick={openConnections}>
               {e?.mode === "demo" ? "Connect Meta models" : "Model details"}
               <ArrowUpRight size={15} />
             </button>
@@ -674,6 +688,7 @@ function App() {
                       <input
                         ref={searchRef}
                         placeholder="Search vendor, invoice or line…"
+                        aria-label="Search sample"
                         value={query}
                         onChange={(ev) => setQuery(ev.target.value)}
                       />
@@ -823,6 +838,23 @@ function App() {
                       </button>
                     ))}
                   </div>
+                  {docs.length > 8 && (
+                    <select
+                      className="source-select"
+                      aria-label="Source document"
+                      value={doc?.id || ""}
+                      onChange={(event) => {
+                        setDocId(event.target.value);
+                        setFocusCrop("");
+                      }}
+                    >
+                      {docs.map((d) => (
+                        <option key={d.id} value={d.id}>
+                          {d.name}
+                        </option>
+                      ))}
+                    </select>
+                  )}
                   <DocumentPreview
                     doc={doc}
                     crops={crops}
@@ -1470,6 +1502,15 @@ function DocumentPreview({
   selected: string;
   onCrop: (id: string) => void;
 }) {
+  const focusRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (selected)
+      focusRef.current?.scrollIntoView({
+        block: "nearest",
+        inline: "nearest",
+        behavior: "smooth",
+      });
+  }, [selected]);
   return (
     <div className="document-stage">
       {doc ? (
@@ -1492,6 +1533,7 @@ function DocumentPreview({
           {crops.map((c) => (
             <button
               key={c.id}
+              ref={selected === c.id ? focusRef : undefined}
               className={"evidence-box " + (selected === c.id ? "focused" : "")}
               style={{
                 left: (c.bbox[0] / doc.width) * 100 + "%",
