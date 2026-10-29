@@ -51,7 +51,9 @@ The inspected submission form contains: Team Name; Team Members; track; problem/
 
 ## Credits and billing instructions
 
-The guide directs individuals to claim credits through its form; credits are processed in batches. Applying the credit to Meta billing requires a card and can involve a temporary preauthorization. A spend-limit notification is **not a guaranteed hard cap**. Monitor actual provider usage and billing. No credit claim, card entry, billing change or purchase was performed by the coding agent. The separately linked Credit Terms PDF remains unread because retrieval was blocked.
+The guide directs individuals to claim credits through its form; credits are processed in batches. Applying the credit to Meta billing requires a card and can involve a temporary preauthorization. A spend-limit notification is **not a guaranteed hard cap**. Monitor actual provider usage and billing. No Meta credit claim, card entry, billing change or purchase was performed by the coding agent. The separately linked Credit Terms PDF remains unread because retrieval was blocked.
+
+The separate Baseten credits request was submitted on 29 October after the participant explicitly approved its personal-use acknowledgement and submission. The form confirmed receipt and says selected applicants will be emailed. This is a request, not a credit grant or evidence of Baseten access. The saved Cerebral Valley application was inspected and showed **Indie Dev Track**, which was used in the request. Its private receipt is retained locally outside Git.
 
 ## Meta integration facts
 

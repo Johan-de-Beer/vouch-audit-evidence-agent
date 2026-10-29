@@ -16,7 +16,7 @@ The form showed **Johan de Beer** (`JohandeBeer`). Confirm the registered member
 
 ## Track
 
-Suggested value for a sole individual entry: **Indie Dev Track**. If this entry is instead made by an eligible startup, use the participant's actual **Startup Track** selection and authorized representative. Enter one track only. No track choice has been saved by the coding agent.
+The participant's saved Cerebral Valley application was inspected on 29 October and says **Indie Dev Track**. The Baseten credits request uses the matching **Indie** option. The final hackathon submission's track has not been edited or submitted by the coding agent; keep it consistent with the participant's actual registration and any permitted changes.
 
 ## Problem / theme
 
